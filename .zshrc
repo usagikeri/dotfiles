@@ -66,8 +66,8 @@ export EDITOR="/usr/local/bin/vim"
 # prompt
 export PS1="%F{3}%C$%f"
 # gcloud
-export CLOUDSDK_PYTHON=/Users/shinya/.pyenv/versions/2.7.11/bin/python2.7  
-export PYTHONPATH="/Users/shinya/.pyenv/versions/3.5.1/lib/python3.5/site-packages:$PYTHONPATH"
+export CLOUDSDK_PYTHON=${Home}/.pyenv/versions/2.7.11/bin/python2.7  
+export PYTHONPATH="${HOME}/.pyenv/versions/3.5.1/lib/python3.5/site-packages:$PYTHONPATH"
 # pyenv
 export PYENV_ROOT="${HOME}/.pyenv"
 if [ -d "${PYENV_ROOT}" ]; then
@@ -83,9 +83,9 @@ function ml(){
 }
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/shinya/Desktop/julipy/googleCloudSpeechAPI/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/shinya/Desktop/julipy/googleCloudSpeechAPI/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f '${HOME}/Desktop/julipy/googleCloudSpeechAPI/google-cloud-sdk/path.zsh.inc' ]; then source '${HOME}/Desktop/julipy/googleCloudSpeechAPI/google-cloud-sdk/path.zsh.inc'; fi
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/shinya/Desktop/julipy/googleCloudSpeechAPI/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/shinya/Desktop/julipy/googleCloudSpeechAPI/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f '${HOME}/Desktop/julipy/googleCloudSpeechAPI/google-cloud-sdk/completion.zsh.inc' ]; then source '${HOME}/Desktop/julipy/googleCloudSpeechAPI/google-cloud-sdk/completion.zsh.inc'; fi
 
 # fzf setting
 # export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git"'
