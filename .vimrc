@@ -88,6 +88,10 @@ Plug 'scrooloose/syntastic'
 Plug 'Yggdroot/indentLine'
 call plug#end()
 
+" exe
+autocmd BufNewFile,BufRead *.py nnoremap <C-r> :!python %
+autocmd BufNewFile,BufRead *.kt nnoremap <C-r> :!kt %
+
 " syntastic
 " let g:syntastic_python_checkers
 let g:syntastic_python_checkers = ['pyflakes', 'pep8']

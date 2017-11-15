@@ -13,6 +13,7 @@ alias semi="cd /Volumes/SD/dgaku/semi"
 alias log="python /Volumes/SD/dgaku/study_log/html/out.py"
 alias julites="julius -C ~/Desktop/julipy/filtaring/dictationKit4.3.1/00con.jconf"
 alias tl="tmux ls"
+alias kj="java -jar $1"
 
 # settings
 autoload -U compinit
