@@ -86,6 +86,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'itchyny/lightline.vim'
 Plug 'scrooloose/syntastic'
 Plug 'Yggdroot/indentLine'
+Plug 'udalov/kotlin-vim'
 call plug#end()
 
 " exe
