@@ -1,19 +1,23 @@
 # alias
-# ------------
-alias vi="/usr/local/bin/vim"
 alias vim="/usr/local/bin/vim"
-alias e="emacs"
+alias vi="/usr/local/bin/vim"
 alias p="python"
 alias ip="ipython"
+alias jl="jupyter lab"
 alias ls="ls -G"
 alias ll="ls -lG"
 alias la="ls -laG"
+alias lsl="ls -1G"
 alias alisp="/usr/local/acl10.1.64/alisp"
 alias semi="cd /Volumes/SD/dgaku/semi"
 alias log="python /Volumes/SD/dgaku/study_log/html/out.py"
-alias julites="julius -C ~/Desktop/julipy/filtaring/dictationKit4.3.1/00con.jconf"
 alias tl="tmux ls"
 alias kj="java -jar $1"
+alias sd="cd /Volumes/SD"
+alias shread="source ~/.zshrc"
+alias m2p="md2pukiwiki"
+alias derm="docker ps -f 'status=exited' -q | xargs docker rm -f"
+alias darm="docker ps -a -q | xargs docker rm -f"
 
 # settings
 autoload -U compinit
@@ -62,32 +66,45 @@ bindkey "^S" history-incremental-search-forward
 
 # export
 # ------------
+# andoroid sdk
+export PATH=$PATH:/Users/shinya/Library/Android/sdk/platform-tools
+# gradle
+export PATH=$PATH:/usr/local/bin/gradle
+# groovy
+export PATH=$PATH:/usr/local/bin/groovy
 # editor
 export EDITOR="/usr/local/bin/vim"
+# LS_COLOR
+export LS_COLORS="di=01;36"
 # prompt
-export PS1="%F{3}%C$%f"
+export PS1="%F{4}%C$%f"
 # gcloud
+export GOOGLE_APPLICATION_CREDENTIALS=/Users/shinya/Desktop/julipy/googleCloudSpeechAPI/UWFproject-008e948e42d7.json
 export CLOUDSDK_PYTHON=${Home}/.pyenv/versions/2.7.11/bin/python2.7  
 export PYTHONPATH="${HOME}/.pyenv/versions/3.5.1/lib/python3.5/site-packages:$PYTHONPATH"
+export CLOUDSDK_PYTHON=/Users/shinya/.pyenv/versions/2.7.11/bin/python2.7
 # pyenv
 export PYENV_ROOT="${HOME}/.pyenv"
 if [ -d "${PYENV_ROOT}" ]; then
    export PATH=${PYENV_ROOT}/bin:$PATH
    eval "$(pyenv init -)"
 fi
+## Go settings
+if [ -x "`which go`" ]; then
+    export GOPATH=$HOME/.go
+    export PATH=$PATH:$GOPATH/bin
+fi
 
-# own functios
+# my functios
 # ------------
+# Java Compile and Run
+function jcr(){
+        javac $1 && basename $1 .java | xargs java
+}
 # Markdown Viewer
 function ml(){
     pandoc -s -f markdown -t html $1 | nocorrect lynx -stdin;
 }
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '${HOME}/Desktop/julipy/googleCloudSpeechAPI/google-cloud-sdk/path.zsh.inc' ]; then source '${HOME}/Desktop/julipy/googleCloudSpeechAPI/google-cloud-sdk/path.zsh.inc'; fi
-# The next line enables shell command completion for gcloud.
-if [ -f '${HOME}/Desktop/julipy/googleCloudSpeechAPI/google-cloud-sdk/completion.zsh.inc' ]; then source '${HOME}/Desktop/julipy/googleCloudSpeechAPI/google-cloud-sdk/completion.zsh.inc'; fi
-
 # fzf setting
 # export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git"'
 export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
@@ -120,3 +137,21 @@ function select-history() {
 }
 zle -N select-history
 bindkey '^r' select-history
+
+autoload -Uz vcs_info
+setopt prompt_subst
+zstyle ':vcs_info:git:*' check-for-changes true
+zstyle ':vcs_info:git:*' stagedstr "%F{yellow}!"
+zstyle ':vcs_info:git:*' unstagedstr "%F{red}+"
+zstyle ':vcs_info:*' formats "%F{green}%c%u[%b]%f"
+zstyle ':vcs_info:*' actionformats '[%b|%a]'
+precmd () { 
+    vcs_info
+}
+RPROMPT='${vcs_info_msg_0_}'
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/shinya/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/shinya/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/shinya/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/shinya/google-cloud-sdk/completion.zsh.inc'; fi

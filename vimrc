@@ -1,21 +1,21 @@
 set fileencodings=utf-8,euc-jp,sjis,iso-2022-jp
-"文字コードをUTF-8に設定する．
-"set fenc=utf-8
+" 文字コードをUTF-8に設定する．
+" set fenc=utf-8
 set encoding=utf-8
 
-"行番号を表示する．
+" 行番号を表示する．
 set number
-"タブ入力を複数の空白にする
+" タブ入力を複数の空白にする
 set expandtab
-"タブの移動を半角4つ分に設定（Pythonでの利用を視野に入れて．）．
+" タブの移動を半角4つ分に設定（Pythonでの利用を視野に入れて．）．
 set tabstop=4
-"改行前の行のインデントを継続する
+" 改行前の行のインデントを継続する
 set autoindent
 
-"クリップボードの共有"
+" クリップボードの共有
 set clipboard=unnamed,autoselect
 
-"対応する括弧を強調表示
+" 対応する括弧を強調表示
 set showmatch
 
 set incsearch " インクリメンタルサーチ. １文字入力毎に検索を行う
@@ -38,7 +38,7 @@ nnoremap <up> gk
 " バックスペースキーの有効化
 
 "ビープ音を視覚表示
-set visualbell
+set visualbell t_vb=
 
 "編集中のファイルが更新された場合，自動で読み直す．
 set autoread
@@ -61,6 +61,12 @@ imap <C-n> <Down>
 imap <C-j> <Esc>
 noremap! <C-j> <Esc>
 
+" jsonのconcealを無効化
+set conceallevel=0
+
+" tで改行を挿入 
+" nnoremap t :<C-u>call append(expand('.'), '')<Cr>j
+
 set laststatus=2
 "set t_Co=256
 
@@ -81,17 +87,25 @@ Plug 'jistr/vim-nerdtree-tabs'
 Plug 'altercation/vim-colors-solarized'
 Plug 'tpope/vim-surround'
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
+Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'ervandew/supertab'
 Plug 'tpope/vim-fugitive'
 Plug 'itchyny/lightline.vim'
 Plug 'scrooloose/syntastic'
 Plug 'Yggdroot/indentLine'
 Plug 'udalov/kotlin-vim'
+Plug 'cohama/lexima.vim'
+Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
+Plug 'kannokanno/previm', {'for': 'markdown'}
+" Plug 'kovisoft/slimv' "lisp plugin
 call plug#end()
 
 " exe
-autocmd BufNewFile,BufRead *.py nnoremap <C-r> :!python %
-autocmd BufNewFile,BufRead *.kt nnoremap <C-r> :!kt %
+autocmd BufNewFile,BufRead *.py nnoremap <C-a> :!python %
+autocmd BufNewFile,BufRead *.kt nnoremap <C-a> :!kt %
+
+" Previm settings
+let g:previm_open_cmd = 'open -a "Google Chrome"'
 
 " syntastic
 " let g:syntastic_python_checkers
