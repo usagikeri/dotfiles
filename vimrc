@@ -1,111 +1,139 @@
+" Leader-key Setting
+let mapleader = "\<Space>"
+
+" Character Settings
+" Read Character-code
 set fileencodings=utf-8,euc-jp,sjis,iso-2022-jp
-" 文字コードをUTF-8に設定する．
-" set fenc=utf-8
+" Write Character-code
+set fileencodings=utf-8
+" Internal Character-code
 set encoding=utf-8
 
-" 行番号を表示する．
+" Display line number
 set number
-" タブ入力を複数の空白にする
+" Tab Settings
 set expandtab
-" タブの移動を半角4つ分に設定（Pythonでの利用を視野に入れて．）．
 set tabstop=4
-" 改行前の行のインデントを継続する
+" Continue indention
 set autoindent
 
-" クリップボードの共有
+" Share Clipboard
 set clipboard=unnamed,autoselect
 
-" 対応する括弧を強調表示
+" Highlight the corresponding parentheses
 set showmatch
 
-set incsearch " インクリメンタルサーチ. １文字入力毎に検索を行う
-set ignorecase " 検索パターンに大文字小文字を区別しない
-set smartcase " 検索パターンに大文字を含んでいたら大文字小文字を区別する
-set hlsearch " 検索結果をハイライト
-" ESCキー2度押しでハイライトの切り替え
+" Search Settings
+set incsearch 
+set ignorecase 
+set smartcase 
+set hlsearch 
+" Toggle highlighting by pressing the ESC key twice
 nnoremap <silent><Esc><Esc> :<C-u>set nohlsearch!<CR>
 
-set whichwrap=b,s,h,l,<,>,[,],~ " カーソルの左右移動で行末から次の行の行頭への移動が可能になる
-set number " 行番号を表示
-set cursorline " カーソルラインをハイライト
-
-" 行が折り返し表示されていた場合、行単位ではなく表示行単位でカーソルを移動する
+" Cursor Settings
+set whichwrap=b,s,h,l,<,>,[,],~ 
+set cursorline
+" Vertical movement
 nnoremap j gj
 nnoremap k gk
 nnoremap <down> gj
 nnoremap <up> gk
-
-" バックスペースキーの有効化
-
-"ビープ音を視覚表示
-set visualbell t_vb=
-
-"編集中のファイルが更新された場合，自動で読み直す．
-set autoread
-"複数ファイル編集中に切り替えが保存無しで可能
-set hidden
-
-"表示行単位で上下移動するように
-nnoremap j gj
-nnoremap k gk
-nnoremap <Down> gj
-nnoremap <Up>   gk
-
-" Emacsっぽい移動方法に
+" Like Emacs 
 imap <C-f> <Right>
 imap <C-b> <Left>
 imap <C-p> <Up>
 imap <C-n> <Down>
+" Move head in insert-mode
+inoremap <C-a> <ESC>I
+" Move end in insert-mode
+inoremap <C-e> <ESC>A
 
-"ESCの変更
+" File Settings
+set autoread
+set hidden
+
+" Other
+" Activate back space key
+set backspace=indent,eol,start
+set visualbell t_vb=
+" Change ESC
 imap <C-j> <Esc>
 noremap! <C-j> <Esc>
-
-" jsonのconcealを無効化
+" Inactive conceal of Json
 set conceallevel=0
-
-" tで改行を挿入 
-" nnoremap t :<C-u>call append(expand('.'), '')<Cr>j
-
+" No hilight
+set cole=0
+" Insert a new line
+nnoremap <Leader>t :<C-u>call append(expand('.'), '')<Cr>j
+" All Copy
+nnoremap <Leader>y :%y<Cr>
+" Always Display Status-Line
 set laststatus=2
-"set t_Co=256
 
-" fzf
-set rtp+=~/.fzf
+" Exe Code
+autocmd BufNewFile,BufRead *.sh nnoremap <Leader>a :!sh %
+autocmd BufNewFile,BufRead *.py nnoremap <Leader>a :!python %
+autocmd BufNewFile,BufRead *.go nnoremap <Leader>a :!go run % 
+autocmd BufNewFile,BufRead *.kt nnoremap <Leader>a :!kt % 
+autocmd BufNewFile,BufRead *.md nnoremap <Leader>a :PrevimOpen
 
-"NerdTree-Tabsのショートカット
-"commad - n の表示
-map <C-n> <plug>NERDTreeTabsToggle<CR>
-
-"vim-plugの設定
+" Vim-Plug Settings
 call plug#begin('~/.vim/plugged') 
 Plug 'Shougo/neocomplete.vim'
-Plug 'Shougo/vimproc.vim' , {'do': 'make'}
 Plug 'junegunn/vim-plug', {'dir': '~/.vim/plugged/vim-plug/autoload'}
+Plug 'davidhalter/jedi-vim', {'for': 'python'}
+Plug 'Vimjas/vim-python-pep8-indent'
+Plug 'Shougo/vimproc.vim' , {'do': 'make'}
 Plug 'scrooloose/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'altercation/vim-colors-solarized'
 Plug 'tpope/vim-surround'
-Plug 'davidhalter/jedi-vim', {'for': 'python'}
-Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'ervandew/supertab'
-Plug 'tpope/vim-fugitive'
 Plug 'itchyny/lightline.vim'
 Plug 'scrooloose/syntastic'
 Plug 'Yggdroot/indentLine'
 Plug 'udalov/kotlin-vim'
-Plug 'cohama/lexima.vim'
 Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
 Plug 'kannokanno/previm', {'for': 'markdown'}
-" Plug 'kovisoft/slimv' "lisp plugin
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim',
+Plug 'terryma/vim-expand-region'
 call plug#end()
 
-" exe
-autocmd BufNewFile,BufRead *.py nnoremap <C-a> :!python %
-autocmd BufNewFile,BufRead *.kt nnoremap <C-a> :!kt %
+"NerdTree-Tabs
+map <C-n> <plug>NERDTreeTabsToggle<CR>
+
+" fzf.vim settings
+set rtp+=~/.fzf
+let g:fzf_command_prefix = 'Fzf'
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-s': 'split',
+  \ 'ctrl-v': 'vsplit'
+\}
+" Default fzf layout
+let g:fzf_layout = { 'down': '~30%' }
+" Fzf key-map
+nnoremap <silent><Leader>f :FzfFiles<CR>
+nnoremap <silent><Leader>b :FzfBuffers<CR>
+" nnoremap <silent><Leader>t :FzfTags<CR>
+
+" vim-expand-region settings
+vmap v <Plug>(expand_region_expand)
+vmap <C-v> <Plug>(expand_region_shrink)
+
+" vim-markdown settings
+let g:vim_markdown_folding_disabled = 1
+let g:vim_markdown_toc_autofit = 1
+let g:vim_markdown_conceal = 0
+let g:tex_conceal = ""
+let g:vim_markdown_math = 1
 
 " Previm settings
 let g:previm_open_cmd = 'open -a "Google Chrome"'
+let g:previm_disable_default_css = 1
+let g:previm_custom_css_path = '~/dotfiles/vim/templates/previm/markdown.css'
 
 " syntastic
 " let g:syntastic_python_checkers
@@ -128,10 +156,10 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 if !exists('g:neocomplete#force_omni_input_patterns')
     let g:neocomplete#force_omni_input_patterns = {}
 endif
+let g:neocomplete#force_omni_input_patterns.python = '\h\w*\|[^. \t]\.\w*' 
 
-let g:neocomplete#force_omni_input_patterns.python = '\h\w*\|[^. \t]\.\w*'
-
-" NeoComplete Settings ===============================
+" NeoComplete Settings
+" ===============================
 " Use neocomplete.
 let g:neocomplete#enable_at_startup = 1
 " Use smartcase.

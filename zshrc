@@ -13,11 +13,24 @@ alias semi="cd /Volumes/SD/dgaku/semi"
 alias log="python /Volumes/SD/dgaku/study_log/html/out.py"
 alias tl="tmux ls"
 alias kj="java -jar $1"
+# cd md dir
+alias mdd="cd ~/Google\ ドライブ/md"
+# cd SD
 alias sd="cd /Volumes/SD"
+# source ~/.zshrc
 alias shread="source ~/.zshrc"
+# Pukiwiki to Markdown
 alias m2p="md2pukiwiki"
+# Kobasemi VPN Connect or Disconnct
+alias kvc="networksetup -connectpppoeservice kobasemi"
+alias kvd="networksetup -disconnectpppoeservice kobasemi"
+# PDFの二段組を一段に変換する
+alias k2p="k2pdfopt -ui- -n -w 1.0s -h 1.0s -om 1,0.5,1,0.5 -c -wrap- -col 2"
+# Docker
 alias derm="docker ps -f 'status=exited' -q | xargs docker rm -f"
 alias darm="docker ps -a -q | xargs docker rm -f"
+alias djshell="docker run -it --rm parana/jshell jshell"
+alias dim="docker run --rm -it --name dvim -v ${PWD}:/home/editor usagikeri/docker-vim"
 
 # settings
 autoload -U compinit
@@ -97,6 +110,10 @@ fi
 
 # my functios
 # ------------
+# mkdir and cd
+function mkcd(){
+        mkdir $1 && cd $1
+}
 # Java Compile and Run
 function jcr(){
         javac $1 && basename $1 .java | xargs java
