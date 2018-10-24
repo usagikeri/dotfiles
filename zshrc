@@ -1,6 +1,9 @@
 # alias
-alias vim="/usr/local/bin/vim"
-alias vi="/usr/local/bin/vim"
+alias mvim="/Volumes/SD/Applications/MacVim.app/Contents/bin/mvim"
+alias vi="nvim"
+alias vim="nvim"
+alias oni= "/Volumes/SD/Applications/Oni.app/Contents/MacOS/Oni"
+alias ctags="/usr/local/bin/ctags"
 alias p="python"
 alias ip="ipython"
 alias jl="jupyter lab"
@@ -26,11 +29,18 @@ alias kvc="networksetup -connectpppoeservice kobasemi"
 alias kvd="networksetup -disconnectpppoeservice kobasemi"
 # PDFの二段組を一段に変換する
 alias k2p="k2pdfopt -ui- -n -w 1.0s -h 1.0s -om 1,0.5,1,0.5 -c -wrap- -col 2"
-# Docker
+
+# Docker Settings
 alias derm="docker ps -f 'status=exited' -q | xargs docker rm -f"
 alias darm="docker ps -a -q | xargs docker rm -f"
 alias djshell="docker run -it --rm parana/jshell jshell"
-alias dim="docker run --rm -it --name dvim -v ${PWD}:/home/editor usagikeri/docker-vim"
+export DISPLAY_MAC="ifconfig en0 | grep inet | awk '$1=="inet" {print $2}':0"
+function startx() {
+    if [ -z "$(ps -ef|grep XQuartz|grep -v grep)" ] ; then
+        open -a XQuartz
+        socat TCP-LISTEN:6000,reuseaddr,fork UNIX-CLIENT:\"$DISPLAY\" &
+    fi
+}
 
 # settings
 autoload -U compinit
@@ -92,7 +102,7 @@ export LS_COLORS="di=01;36"
 # prompt
 export PS1="%F{4}%C$%f"
 # gcloud
-export GOOGLE_APPLICATION_CREDENTIALS=/Users/shinya/Desktop/julipy/googleCloudSpeechAPI/UWFproject-008e948e42d7.json
+export GOOGLE_APPLICATION_CREDENTIALS=/Volumes/SD/research/julipy/googleCloudSpeechAPI/UWFproject-008e948e42d7.json
 export CLOUDSDK_PYTHON=${Home}/.pyenv/versions/2.7.11/bin/python2.7  
 export PYTHONPATH="${HOME}/.pyenv/versions/3.5.1/lib/python3.5/site-packages:$PYTHONPATH"
 export CLOUDSDK_PYTHON=/Users/shinya/.pyenv/versions/2.7.11/bin/python2.7
@@ -104,7 +114,7 @@ if [ -d "${PYENV_ROOT}" ]; then
 fi
 ## Go settings
 if [ -x "`which go`" ]; then
-    export GOPATH=$HOME/.go
+    export GOPATH=$HOME/go
     export PATH=$PATH:$GOPATH/bin
 fi
 

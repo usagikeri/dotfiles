@@ -1,36 +1,64 @@
-" Leader-key Setting
+"
+" Vim Settings
+"
+
+" Leader-key Settings
+" ====================
 let mapleader = "\<Space>"
+" ====================
 
 " Character Settings
+" ====================
 " Read Character-code
 set fileencodings=utf-8,euc-jp,sjis,iso-2022-jp
 " Write Character-code
 set fileencodings=utf-8
 " Internal Character-code
 set encoding=utf-8
+" ====================
 
+" Display Settings
+" ====================
 " Display line number
 set number
-" Tab Settings
+" Highlight the corresponding parentheses
+set showmatch
+" Inactive conceal of Json
+set conceallevel=0
+" No hilight
+set cole=0
+" No visualbell
+set visualbell t_vb=
+" Always Display Status-Line
+set laststatus=2
+" ====================
+
+" Tab and Indention Settings
+" ====================
 set expandtab
 set tabstop=4
 " Continue indention
 set autoindent
+" ====================
 
+" Clipboard Settings
+" ====================
 " Share Clipboard
-" set clipboard=unnamed,autoselect
-
-" Highlight the corresponding parentheses
-set showmatch
+set clipboard=unnamed
+" ====================
 
 " Search Settings
+" ====================
 set incsearch
 set ignorecase
 set smartcase
 set hlsearch
 " Toggle highlighting by pressing the ESC key twice
 nnoremap <silent><Esc><Esc> :<C-u>set nohlsearch!<CR>
+" ====================
 
+" Move Settings
+" ====================
 " Cursor Settings
 set whichwrap=b,s,h,l,<,>,[,],~
 set cursorline
@@ -48,30 +76,18 @@ imap <C-n> <Down>
 inoremap <C-a> <ESC>I
 " Move end in insert-mode
 inoremap <C-e> <ESC>A
-
-" File Settings
-set autoread
-set hidden
-
-" Other
 " Activate back space key
 set backspace=indent,eol,start
-set visualbell t_vb=
-" Inactive conceal of Json
-set conceallevel=0
-" No hilight
-set cole=0
+" ====================
 
-" Leader Key
-
+" Leader Key Commands
+" ====================
 " Insert a new line
 nnoremap <silent><Leader>j :<C-u>call append(expand('.'), '')<Cr>j
 " Insert a new Space
 nmap <silent><Leader><Space> i<Space><ESC>
 " All Copy
 nnoremap <silent><Leader>y :%y<Cr>
-" Always Display Status-Line
-set laststatus=2
 " Horizon split
 nnoremap <silent><Leader>hs :split<Cr>
 " Vertical split
@@ -80,131 +96,99 @@ nnoremap <silent><Leader>vs :vsplit<Cr>
 nnoremap <silent><Leader>r :source ~/.vimrc<Cr>
 " Trailing Whitespace
 nnoremap <Leader>w :FixWhitespace<CR>
+" Close Buf 
+nnoremap <Leader>q :q<CR>
+" ====================
 
-" exe code
+" Quick run
+" ====================
 autocmd bufnewfile,bufread *.sh nnoremap <leader>a :!sh %
 autocmd bufnewfile,bufread *.py nnoremap <leader>a :!python %
 autocmd bufnewfile,bufread *.go nnoremap <leader>a :!go run %
 autocmd bufnewfile,bufread *.kt nnoremap <leader>a :!kt %
 autocmd bufnewfile,bufread *.md nnoremap <leader>a :PrevimOpen
-
+" ====================
 
 " Vim-Plug Settings
+" ====================
 call plug#begin('~/.vim/plugged')
-Plug 'Shougo/neocomplete.vim'
-" Plug 'Shougo/deoplete.nvim'
-Plug 'zchee/deoplete-jedi'
 Plug 'junegunn/vim-plug', {'dir': '~/.vim/plugged/vim-plug/autoload'}
-Plug 'davidhalter/jedi-vim', {'for': 'python'}
-Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'Shougo/vimproc.vim' , {'do': 'make'}
-Plug 'scrooloose/nerdtree'
-Plug 'jistr/vim-nerdtree-tabs'
-" Plug 'altercation/vim-colors-solarized'
-Plug 'tpope/vim-surround'
+Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins' }
 Plug 'ervandew/supertab'
-Plug 'itchyny/lightline.vim'
-Plug 'scrooloose/syntastic'
-Plug 'Yggdroot/indentLine'
-" Plug 'udalov/kotlin-vim'
+" Python
+Plug 'zchee/deoplete-jedi', {'for': 'python'}
+Plug 'davidhalter/jedi-vim', {'for': 'python'}
+Plug 'Vimjas/vim-python-pep8-indent', {'for': 'python'}
+" Go
+Plug 'fatih/vim-go', {'for': 'go'}
+Plug 'zchee/deoplete-go', {'for': 'go'}
+" Markdown
 Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
 Plug 'kannokanno/previm', {'for': 'markdown'}
+" File
+Plug 'scrooloose/nerdtree'
+Plug 'jistr/vim-nerdtree-tabs'
+" Visual
+Plug 'itchyny/lightline.vim'
+Plug 'simeji/winresizer'
+Plug 'Yggdroot/indentLine'
+" FZF
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim',
+" Buf
+Plug 'jlanzarotta/bufexplorer'
 Plug 'junegunn/vim-peekaboo'
+" Visual-mode
 Plug 'terryma/vim-expand-region'
-Plug 'bronson/vim-trailing-whitespace'
+" Tag
 Plug 'majutsushi/tagbar'
 Plug 'wesleyche/SrcExpl'
 Plug 'vim-scripts/taglist.vim'
-Plug 'simeji/winresizer'
-Plug 'jlanzarotta/bufexplorer'
-Plug 'fatih/vim-go'
-Plug 'h1mesuke/vim-alignta'
+" Formater
+Plug 'dhruvasagar/vim-table-mode'
+" Other
+Plug 'tpope/vim-surround'
+Plug 'scrooloose/syntastic'
+Plug 'reireias/vim-cheatsheet'
 call plug#end()
+" ====================
 
-
-" NeoComplete Settings
-" ===============================
-" Use neocomplete.
-let g:neocomplete#enable_at_startup = 1
-" Use smartcase.
-let g:neocomplete#enable_smart_case = 1
-
-let g:neocomplete#use_vimproc = 1
-
-" Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 3
-let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-
-let g:neocomplete#enable_refresh_always = 1
-
-" Define dictionary.
-let g:neocomplete#sources#dictionary#dictionaries = {
-    \ 'default' : '',
-\}
-
-" Define keyword.
-if !exists('g:neocomplete#keyword_patterns')
-    let g:neocomplete#keyword_patterns = {}
-endif
-let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-
-" Plugin key-mappings.
-inoremap <expr><C-g>     neocomplete#undo_completion()
-inoremap <expr><C-l>     neocomplete#complete_common_string()
-
-" Recommended key-mappings.
-" <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-  return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
-  " For no inserting <CR> key.
-  "return pumvisible() ? "\<C-y>" : "\<CR>"
-endfunction
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-
-" Enable omni completion.
-augroup neocomplete
+" Jedi vim settings
+" ====================
+let g:jedi#force_py_version = 3
+augroup jedi
     autocmd!
-    autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-    autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-    autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-    autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+    autocmd FileType python setlocal completeopt-=preview
+    autocmd FileType python setlocal omnifunc=jedi#completions
 augroup END
 
-" Enable heavy omni completion.
-if !exists('g:neocomplete#sources#omni#input_patterns')
-  let g:neocomplete#sources#omni#input_patterns = {}
-endif
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#auto_completion_start_length = 1
 
-" For perlomni.vim setting.
-" https://github.com/c9s/perlomni.vim
-let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+let g:deoplete#sources#jedi#python_path = "/Users/shinya/.pyenv/shims/python3.7"
+let g:deoplete#sources#jedi#server_timeout=100
+let g:deoplete#sources#jedi#statement_length=100
+let g:jedi#completions_enabled = 0
+" =================================
 
-let g:neocomplete#sources#omni#input_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
-
-let g:neocomplete#sources#omni#input_patterns.go = '\h\w\.\w*'
-
-if !exists('g:neocomplete#force_omni_input_patterns')
-    let g:neocomplete#force_omni_input_patterns = {}
-endif
-let g:neocomplete#force_omni_input_patterns.cpp =
-        \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
-" Golang
-let g:go_fmt_command = "goimports"
-let g:neocomplete#sources#omni#input_patterns.go = '\h\w*\.\w*'
-" ===============================
-
+" Vim-Go Settings
+" =================================
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+" =================================
+let g:go_highlight_functions = 1
 
 "NerdTree-abs
+" =================================
 map <C-n> <plug>NERDTreeTabsToggle<CR>
 let g:NERDTreeShowBookmarks=1
 let NERDTreeWinSize=20
+" =================================
 
 " fzf.vim settings
+" =================================
 set rtp+=~/.fzf
 let g:fzf_command_prefix = 'Fzf'
 let g:fzf_action = {
@@ -218,24 +202,37 @@ let g:fzf_layout = { 'down': '~30%' }
 nnoremap <silent><Leader>f :FzfFiles<CR>
 nnoremap <silent><Leader>b :FzfBuffers<CR>
 nnoremap <silent><Leader>t :FzfTags<CR>
+" =================================
 
 " vim-expand-region settings
+" =================================
 vmap v <Plug>(expand_region_expand)
 vmap <C-v> <Plug>(expand_region_shrink
+" =================================
 
 " vim-markdown settings
+" =================================
 let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_toc_autofit = 1
 let g:vim_markdown_conceal = 0
 let g:tex_conceal = ""
 let g:vim_markdown_math = 1
+" =================================
 
 " Previm settings
+" =================================
 let g:previm_open_cmd = 'open -a "Google Chrome"'
 let g:previm_disable_default_css = 1
 let g:previm_custom_css_path = '~/dotfiles/vim/templates/previm/markdown.css'
+" =================================
+
+" vim-cheatsheet 
+" =================================
+let g:cheatsheet#cheat_file = '~/dotfiles/vim/cheatsheet/cheatsheet.md'
+" =================================
 
 " syntastic
+" =================================
 " let g:syntastic_python_checkers
 let g:syntastic_python_checkers = ['pyflakes', 'pep8']
 " jedi-vim
@@ -245,21 +242,10 @@ augroup jedi
     autocmd FileType python setlocal completeopt-=preview
     autocmd FileType python setlocal omnifunc=jedi#completions
 augroup END
+" =================================
 
-" integrate jedi-vim and neocomplete
-let g:jedi#completions_enabled = 0
-let g:jedi#auto_vim_configuration = 0
-
-let g:SuperTabContextDefaultCompletionType = "context"
-let g:SuperTabDefaultCompletionType = "<c-n>"
-
-if !exists('g:neocomplete#force_omni_input_patterns')
-    let g:neocomplete#force_omni_input_patterns = {}
-endif
-let g:neocomplete#force_omni_input_patterns.python = '\h\w*\|[^. \t]\.\w*'
-
-
-" lightline settings ========================
+" lightline settings
+" =================================
 let g:lightline = {
         \ 'colorscheme': 'wombat',
         \ 'mode_map': {'c': 'NORMAL'},
@@ -318,3 +304,4 @@ endfunction
 function! LightlineMode()
   return winwidth(0) > 60 ? lightline#mode() : ''
 endfunction
+" =================================
