@@ -12,12 +12,14 @@ alias ll="ls -lG"
 alias la="ls -laG"
 alias lsl="ls -1G"
 alias alisp="/usr/local/acl10.1.64/alisp"
+alias sbcl="rlwrap sbcl"
+alias clisp="rlwrap clisp"
 alias semi="cd /Volumes/SD/dgaku/semi"
 alias log="python /Volumes/SD/dgaku/study_log/html/out.py"
 alias tl="tmux ls"
 alias kj="java -jar $1"
 # cd md dir
-alias mdd="cd ~/Google\ ドライブ/md"
+alias mdd="cd ~/GoogleDrive/md"
 # cd SD
 alias sd="cd /Volumes/SD"
 # source ~/.zshrc
@@ -34,6 +36,7 @@ alias k2p="k2pdfopt -ui- -n -w 1.0s -h 1.0s -om 1,0.5,1,0.5 -c -wrap- -col 2"
 alias derm="docker ps -f 'status=exited' -q | xargs docker rm -f"
 alias darm="docker ps -a -q | xargs docker rm -f"
 alias djshell="docker run -it --rm parana/jshell jshell"
+
 export DISPLAY_MAC="ifconfig en0 | grep inet | awk '$1=="inet" {print $2}':0"
 function startx() {
     if [ -z "$(ps -ef|grep XQuartz|grep -v grep)" ] ; then
@@ -89,6 +92,10 @@ bindkey "^S" history-incremental-search-forward
 
 # export
 # ------------
+# tex template file path
+export MDTEX="/Users/shinya/Desktop/python/github/MDTEX/temple.tex"
+# md_preview_path
+export MD_PRE_PATH="/Users/shinya/GoogleDrive/md"
 # andoroid sdk
 export PATH=$PATH:/Users/shinya/Library/Android/sdk/platform-tools
 # gradle

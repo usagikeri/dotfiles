@@ -54,7 +54,7 @@ set ignorecase
 set smartcase
 set hlsearch
 " Toggle highlighting by pressing the ESC key twice
-nnoremap <silent><Esc><Esc> :<C-u>set nohlsearch!<CR>
+nnoremap <silent><Esc><Esc> :nohlsearch<CR>
 " ====================
 
 " Move Settings
@@ -68,10 +68,10 @@ nnoremap k gk
 nnoremap <down> gj
 nnoremap <up> gk
 " Like Emacs
-imap <C-f> <Right>
-imap <C-b> <Left>
-imap <C-p> <Up>
-imap <C-n> <Down>
+inoremap <C-f> <Right>
+inoremap <C-b> <Left>
+inoremap <C-p> <Up>
+inoremap <C-n> <Down>
 " Move head in insert-mode
 inoremap <C-a> <ESC>I
 " Move end in insert-mode
@@ -95,9 +95,11 @@ nnoremap <silent><Leader>vs :vsplit<Cr>
 " Reload vimrc
 nnoremap <silent><Leader>r :source ~/.vimrc<Cr>
 " Trailing Whitespace
-nnoremap <Leader>w :FixWhitespace<CR>
-" Close Buf 
-nnoremap <Leader>q :q<CR>
+nnoremap <silent><Leader>w :FixWhitespace<CR>
+" Close Buf
+nnoremap <silent><Leader>q :q<CR>
+" No Hilight
+nnoremap <silent><Leader>n :noh<CR>
 " ====================
 
 " Quick run
@@ -147,6 +149,7 @@ Plug 'wesleyche/SrcExpl'
 Plug 'vim-scripts/taglist.vim'
 " Formater
 Plug 'dhruvasagar/vim-table-mode'
+Plug 'bronson/vim-trailing-whitespace'
 " Other
 Plug 'tpope/vim-surround'
 Plug 'scrooloose/syntastic'
@@ -178,7 +181,6 @@ let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
 " =================================
-let g:go_highlight_functions = 1
 
 "NerdTree-abs
 " =================================
@@ -226,7 +228,7 @@ let g:previm_disable_default_css = 1
 let g:previm_custom_css_path = '~/dotfiles/vim/templates/previm/markdown.css'
 " =================================
 
-" vim-cheatsheet 
+" vim-cheatsheet
 " =================================
 let g:cheatsheet#cheat_file = '~/dotfiles/vim/cheatsheet/cheatsheet.md'
 " =================================
@@ -234,7 +236,7 @@ let g:cheatsheet#cheat_file = '~/dotfiles/vim/cheatsheet/cheatsheet.md'
 " syntastic
 " =================================
 " let g:syntastic_python_checkers
-let g:syntastic_python_checkers = ['pyflakes', 'pep8']
+let g:syntastic_python_checkers = ['flake8', 'pep8']
 " jedi-vim
 let g:jedi#force_py_version = 3
 augroup jedi
@@ -243,6 +245,36 @@ augroup jedi
     autocmd FileType python setlocal omnifunc=jedi#completions
 augroup END
 " =================================
+
+" autopep8 Settings
+" =================================
+" original http://stackoverflow.com/questions/12374200/using-uncrustify-with-vim/15513829#15513829
+function! Preserve(command)
+    " Save the last search.
+    let search = @/
+    " Save the current cursor position.
+    let cursor_position = getpos('.')
+    " Save the current window position.
+    normal! H
+    let window_position = getpos('.')
+    call setpos('.', cursor_position)
+    " Execute the command.
+    execute a:command
+    " Restore the last search.
+    let @/ = search
+    " Restore the previous window position.
+    call setpos('.', window_position)
+    normal! zt
+    " Restore the previous cursor position.
+    call setpos('.', cursor_position)
+endfunction
+
+function! Autopep8()
+    call Preserve(':silent %!autopep8 -')
+endfunction
+
+autocmd FileType python nnoremap <silent><Leader>ap :call Autopep8()<CR>
+
 
 " lightline settings
 " =================================
