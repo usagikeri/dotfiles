@@ -2,7 +2,6 @@
 alias mvim="/Volumes/SD/Applications/MacVim.app/Contents/bin/mvim"
 alias vi="nvim"
 alias vim="nvim"
-alias oni= "/Volumes/SD/Applications/Oni.app/Contents/MacOS/Oni"
 alias ctags="/usr/local/bin/ctags"
 alias p="python"
 alias ip="ipython"
@@ -103,7 +102,7 @@ export PATH=$PATH:/usr/local/bin/gradle
 # groovy
 export PATH=$PATH:/usr/local/bin/groovy
 # editor
-export EDITOR="/usr/local/bin/vim"
+export EDITOR="nvim"
 # LS_COLOR
 export LS_COLORS="di=01;36"
 # prompt
@@ -127,6 +126,10 @@ fi
 
 # my functios
 # ------------
+# Oni
+function oni(){
+        open -a /Volumes/SD/Applications/Oni.app/Contents/MacOS/Oni $1
+}
 # mkdir and cd
 function mkcd(){
         mkdir $1 && cd $1

@@ -1,4 +1,3 @@
-"
 " Vim Settings
 "
 
@@ -45,6 +44,8 @@ set autoindent
 " ====================
 " Share Clipboard
 set clipboard=unnamed
+" new line paste
+nnoremap <silent><Leader>p <silent>o<ESC>p
 " ====================
 
 " Search Settings
@@ -76,6 +77,8 @@ inoremap <C-n> <Down>
 inoremap <C-a> <ESC>I
 " Move end in insert-mode
 inoremap <C-e> <ESC>A
+"delete char
+inoremap <C-h> <BS>
 " Activate back space key
 set backspace=indent,eol,start
 " ====================
@@ -93,22 +96,25 @@ nnoremap <silent><Leader>hs :split<Cr>
 " Vertical split
 nnoremap <silent><Leader>vs :vsplit<Cr>
 " Reload vimrc
-nnoremap <silent><Leader>r :source ~/.vimrc<Cr>
+nnoremap <silent><Leader>rv :source ~/.vimrc<Cr>
 " Trailing Whitespace
 nnoremap <silent><Leader>w :FixWhitespace<CR>
 " Close Buf
 nnoremap <silent><Leader>q :q<CR>
 " No Hilight
 nnoremap <silent><Leader>n :noh<CR>
+" got build and run
+autocmd FileType go nmap <leader>b  <Plug>(go-build)
+autocmd FileType go nmap <leader>r  <Plug>(go-run)
 " ====================
 
 " Quick run
 " ====================
 autocmd bufnewfile,bufread *.sh nnoremap <leader>a :!sh %
 autocmd bufnewfile,bufread *.py nnoremap <leader>a :!python %
-autocmd bufnewfile,bufread *.go nnoremap <leader>a :!go run %
 autocmd bufnewfile,bufread *.kt nnoremap <leader>a :!kt %
 autocmd bufnewfile,bufread *.md nnoremap <leader>a :PrevimOpen
+autocmd bufnewfile,bufread *.tex nnoremap <leader>a :!texpdf %
 " ====================
 
 " Vim-Plug Settings
@@ -150,12 +156,20 @@ Plug 'vim-scripts/taglist.vim'
 " Formater
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'bronson/vim-trailing-whitespace'
+" Git
+Plug 'tpope/vim-fugitive'
 " Other
 Plug 'tpope/vim-surround'
 Plug 'scrooloose/syntastic'
 Plug 'reireias/vim-cheatsheet'
 call plug#end()
 " ====================
+
+" vim-go settings
+" ====================
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
 
 " Jedi vim settings
 " ====================
