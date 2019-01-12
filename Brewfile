@@ -57,6 +57,7 @@ cask "typora"
 cask "virtualbox"
 cask "vmware-remote-console"
 cask "wireshark"
+cask "xquartz"
 
 tap "caskformula/caskformula"
 tap "dart-lang/dart"

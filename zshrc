@@ -75,8 +75,8 @@ setopt hist_ignore_space
 # ヒストリを呼び出してから実行する間に一旦編集可能
 #setopt hist_verify
 # 余分な空白は詰めて記録
-setopt hist_reduce_blanks  
-# 古いコマンドと同じものは無視 
+setopt hist_reduce_blanks
+# 古いコマンドと同じものは無視
 setopt hist_save_no_dups
 # historyコマンドは履歴に登録しない
 setopt hist_no_store
@@ -109,7 +109,7 @@ export LS_COLORS="di=01;36"
 export PS1="%F{4}%C$%f"
 # gcloud
 export GOOGLE_APPLICATION_CREDENTIALS=/Volumes/SD/research/julipy/googleCloudSpeechAPI/UWFproject-008e948e42d7.json
-export CLOUDSDK_PYTHON=${Home}/.pyenv/versions/2.7.11/bin/python2.7  
+export CLOUDSDK_PYTHON=${Home}/.pyenv/versions/2.7.11/bin/python2.7
 export PYTHONPATH="${HOME}/.pyenv/versions/3.5.1/lib/python3.5/site-packages:$PYTHONPATH"
 export CLOUDSDK_PYTHON=/Users/shinya/.pyenv/versions/2.7.11/bin/python2.7
 # pyenv
@@ -182,7 +182,7 @@ zstyle ':vcs_info:git:*' stagedstr "%F{yellow}!"
 zstyle ':vcs_info:git:*' unstagedstr "%F{red}+"
 zstyle ':vcs_info:*' formats "%F{green}%c%u[%b]%f"
 zstyle ':vcs_info:*' actionformats '[%b|%a]'
-precmd () { 
+precmd () {
     vcs_info
 }
 RPROMPT='${vcs_info_msg_0_}'
@@ -192,3 +192,5 @@ if [ -f '/Users/shinya/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/shi
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/shinya/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/shinya/google-cloud-sdk/completion.zsh.inc'; fi
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

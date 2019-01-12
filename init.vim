@@ -14,6 +14,9 @@ set fileencodings=utf-8,euc-jp,sjis,iso-2022-jp
 set fileencodings=utf-8
 " Internal Character-code
 set encoding=utf-8
+" Replace : ;
+noremap ; :
+noremap : ;
 " ====================
 
 " Display Settings
