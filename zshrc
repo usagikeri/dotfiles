@@ -6,6 +6,7 @@ alias ctags="/usr/local/bin/ctags"
 alias p="python"
 alias ip="ipython"
 alias jl="jupyter lab"
+export LSCOLORS=gxfxcxdxbxegedabagacad
 alias ls="ls -G"
 alias ll="ls -lG"
 alias la="ls -laG"
@@ -103,21 +104,43 @@ export PATH=$PATH:/usr/local/bin/gradle
 export PATH=$PATH:/usr/local/bin/groovy
 # editor
 export EDITOR="nvim"
+
 # LS_COLOR
 export LS_COLORS="di=01;36"
 # prompt
-export PS1="%F{4}%C$%f"
+export PS1="%F{2}%C$%f"
+
 # gcloud
 export GOOGLE_APPLICATION_CREDENTIALS=/Volumes/SD/research/julipy/googleCloudSpeechAPI/UWFproject-008e948e42d7.json
 export CLOUDSDK_PYTHON=${Home}/.pyenv/versions/2.7.11/bin/python2.7
 export PYTHONPATH="${HOME}/.pyenv/versions/3.5.1/lib/python3.5/site-packages:$PYTHONPATH"
 export CLOUDSDK_PYTHON=/Users/shinya/.pyenv/versions/2.7.11/bin/python2.7
+
 # pyenv
-export PYENV_ROOT="${HOME}/.pyenv"
+export PYENV_ROOT=$HOME/.pyenv
+export PATH=$PYENV_ROOT/bin:$PATH
+alias pyenv="CFLAGS='-I$(brew --prefix openssl)/include' LDFLAGS='-L$(brew --prefix openssl)/lib' pyenv"
 if [ -d "${PYENV_ROOT}" ]; then
    export PATH=${PYENV_ROOT}/bin:$PATH
-   eval "$(pyenv init -)"
+        export PATH="/Users/shinya/.pyenv/shims:${PATH}"
+        export PYENV_SHELL=zsh
+        source '/usr/local/Cellar/pyenv/1.2.9/libexec/../completions/pyenv.zsh'
+        command pyenv rehash 2>/dev/null
+        function pyenv() {
+          local command
+          command="${1:-}"
+          if [ "$#" -gt 0 ]; then
+            shift
+          fi
+          case "$command" in
+          rehash|shell)
+            eval "$(pyenv "sh-$command" "$@")";;
+          *)
+            command pyenv "$command" "$@";;
+          esac
+        }
 fi
+
 ## Go settings
 if [ -x "`which go`" ]; then
     export GOPATH=$HOME/go

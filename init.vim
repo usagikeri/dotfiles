@@ -104,6 +104,7 @@ nnoremap <silent><Leader>rv :source ~/.vimrc<Cr>
 nnoremap <silent><Leader>w :FixWhitespace<CR>
 " Close Buf
 nnoremap <silent><Leader>q :q<CR>
+nnoremap <silent><Leader>q1 :q!<CR>
 " No Hilight
 nnoremap <silent><Leader>n :noh<CR>
 " got build and run
@@ -118,6 +119,11 @@ autocmd bufnewfile,bufread *.py nnoremap <leader>a :!python %
 autocmd bufnewfile,bufread *.kt nnoremap <leader>a :!kt %
 autocmd bufnewfile,bufread *.md nnoremap <leader>a :PrevimOpen
 autocmd bufnewfile,bufread *.tex nnoremap <leader>a :!texpdf %
+" ====================
+
+" Env val
+" ====================
+let g:python3_host_prog = $PYENV_ROOT . '/shims/python3'
 " ====================
 
 " Vim-Plug Settings
