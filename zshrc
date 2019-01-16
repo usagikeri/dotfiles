@@ -119,26 +119,11 @@ export CLOUDSDK_PYTHON=/Users/shinya/.pyenv/versions/2.7.11/bin/python2.7
 # pyenv
 export PYENV_ROOT=$HOME/.pyenv
 export PATH=$PYENV_ROOT/bin:$PATH
-alias pyenv="CFLAGS='-I$(brew --prefix openssl)/include' LDFLAGS='-L$(brew --prefix openssl)/lib' pyenv"
+#alias pyenv="CFLAGS='-I$(brew --prefix openssl)/include' LDFLAGS='-L$(brew --prefix openssl)/lib' pyenv"
+
 if [ -d "${PYENV_ROOT}" ]; then
    export PATH=${PYENV_ROOT}/bin:$PATH
-        export PATH="/Users/shinya/.pyenv/shims:${PATH}"
-        export PYENV_SHELL=zsh
-        source '/usr/local/Cellar/pyenv/1.2.9/libexec/../completions/pyenv.zsh'
-        command pyenv rehash 2>/dev/null
-        function pyenv() {
-          local command
-          command="${1:-}"
-          if [ "$#" -gt 0 ]; then
-            shift
-          fi
-          case "$command" in
-          rehash|shell)
-            eval "$(pyenv "sh-$command" "$@")";;
-          *)
-            command pyenv "$command" "$@";;
-          esac
-        }
+   eval "$(pyenv init -)"
 fi
 
 ## Go settings
