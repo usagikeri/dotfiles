@@ -116,6 +116,7 @@ autocmd FileType go nmap <leader>r  <Plug>(go-run)
 " ====================
 autocmd bufnewfile,bufread *.sh nnoremap <leader>a :!sh %
 autocmd bufnewfile,bufread *.py nnoremap <leader>a :!python %
+autocmd bufnewfile,bufread *.go nnoremap <leader>a :!go run %
 autocmd bufnewfile,bufread *.kt nnoremap <leader>a :!kt %
 autocmd bufnewfile,bufread *.md nnoremap <leader>a :PrevimOpen
 autocmd bufnewfile,bufread *.tex nnoremap <leader>a :!texpdf %
@@ -123,7 +124,8 @@ autocmd bufnewfile,bufread *.tex nnoremap <leader>a :!texpdf %
 
 " Env val
 " ====================
-let g:python3_host_prog = $PYENV_ROOT . '/shims/python3'
+let g:python_host_prog=$PYENV_ROOT . '/shims/python2'
+let g:python3_host_prog=$PYENV_ROOT . '/shims/python3'
 " ====================
 
 " Vim-Plug Settings
@@ -139,7 +141,7 @@ Plug 'davidhalter/jedi-vim', {'for': 'python'}
 Plug 'Vimjas/vim-python-pep8-indent', {'for': 'python'}
 " Go
 Plug 'fatih/vim-go', {'for': 'go'}
-Plug 'zchee/deoplete-go', {'for': 'go'}
+ Plug 'zchee/deoplete-go', {'for': 'go'}
 " Markdown
 Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
 Plug 'kannokanno/previm', {'for': 'markdown'}
