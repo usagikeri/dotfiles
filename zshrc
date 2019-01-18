@@ -129,6 +129,7 @@ fi
 ## Go settings
 if [ -x "`which go`" ]; then
     export GOPATH=$HOME/go
+    export GOROOT=$( go env GOROOT )
     export PATH=$PATH:$GOPATH/bin
 fi
 
