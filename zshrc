@@ -92,8 +92,10 @@ bindkey "^S" history-incremental-search-forward
 
 # export
 # ------------
+# tex styfile path
+export STY_PATH="/usr/local/texlive/2018/texmf-dist/tex/latex/tools/"
 # tex template file path
-export MDTEX="/Users/shinya/Desktop/python/github/MDTEX/temple.tex"
+export mdtex="/users/shinya/desktop/python/github/mdtex/temple.tex"
 # md_preview_path
 export MD_PRE_PATH="/Users/shinya/GoogleDrive/md"
 # andoroid sdk
@@ -135,6 +137,11 @@ fi
 
 # my functios
 # ------------
+# mt compdef
+function mtcomp (){
+        _files .
+}
+compdef mtcomp mt
 # Oni
 function oni(){
         open -a /Volumes/SD/Applications/Oni.app/Contents/MacOS/Oni $1
@@ -177,6 +184,23 @@ fkill() {
     echo $pid | xargs kill -${1:-9}
   fi
 }
+fs() {
+        local addr
+        local user
+        addr=`cat ~/.ssh/known_hosts | awk '{print $1}' | sort |fzf`
+        if [[ $addr == "" ]];then
+                exit
+        elif [[ $1 == "" ]];then
+                /bin/echo -n "User Name >> "
+                read user
+                echo "ssh $user@$addr"
+                ssh $user@$addr
+        else
+                echo "ssh $1@$addr"
+                ssh $1@$addr
+        fi
+}
+
 function select-history() {
   BUFFER=$(history -n -r 1 | fzf --no-sort +m --query "$LBUFFER" --prompt="History > ")
   CURSOR=$#BUFFER
@@ -203,3 +227,4 @@ if [ -f '/Users/shinya/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/shi
 if [ -f '/Users/shinya/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/shinya/google-cloud-sdk/completion.zsh.inc'; fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
