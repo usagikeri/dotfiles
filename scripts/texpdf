@@ -1,0 +1,37 @@
+#!/bin/sh
+
+tp(){
+	platex -interaction=scrollmode $data.tex && \
+	platex -interaction=scrollmode $data.tex && \
+	dvipdfmx $data.dvi
+    latexmk -c
+}
+
+tpo(){
+	platex -interaction=scrollmode $data.tex && \
+	platex -interaction=scrollmode $data.tex && \
+	dvipdfmx $data.dvi
+    latexmk -c
+
+	open $data.pdf
+}
+
+if [ "$1" = "" ]; then
+    echo "No argument"
+
+else
+
+    getopts "n" opts
+
+    if [ $opts = "n" ]; then
+    	data=`basename $2 .tex`
+
+    	tp
+
+    else
+        data=`basename $1 .tex`
+
+    	tpo
+
+    fi
+fi

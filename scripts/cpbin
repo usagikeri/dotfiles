@@ -1,0 +1,8 @@
+#!/bin/sh
+ 
+for fname in $@
+do
+	chmod a+x $fname
+	sudo cp $fname /usr/local/bin/$fname
+	which $fname
+done
