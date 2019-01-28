@@ -25,8 +25,9 @@ noremap : ;
 set number
 " Highlight the corresponding parentheses
 set showmatch
-" Inactive conceal of Json
+" Inactive conceal
 set conceallevel=0
+set concealcursor=
 " No hilight
 set cole=0
 " No visualbell
@@ -99,7 +100,7 @@ nnoremap <silent><Leader>hs :split<Cr>
 " Vertical split
 nnoremap <silent><Leader>vs :vsplit<Cr>
 " Reload vimrc
-nnoremap <silent><Leader>rv :source ~/.vimrc<Cr>
+nnoremap <silent><Leader>rv :source ~/.config/nvim/init.vim<Cr>
 " Trailing Whitespace
 nnoremap <silent><Leader>w :FixWhitespace<CR>
 " Close Buf
@@ -181,6 +182,7 @@ call plug#end()
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
+let g:go_fmt_command = "goimports"
 
 " Jedi vim settings
 " ====================
