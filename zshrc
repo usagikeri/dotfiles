@@ -1,5 +1,5 @@
 # alias
-alias mvim="/Volumes/SD/Applications/MacVim.app/Contents/bin/mvim"
+alias mvim="/Applications/MacVim.app/Contents/bin/gvim"
 alias vi="nvim"
 alias vim="nvim"
 alias ctags="/usr/local/bin/ctags"
@@ -14,8 +14,8 @@ alias lsl="ls -1G"
 alias alisp="/usr/local/acl10.1.64/alisp"
 alias sbcl="rlwrap sbcl"
 alias clisp="rlwrap clisp"
-alias semi="cd /Volumes/SD/dgaku/semi"
-alias log="python /Volumes/SD/dgaku/study_log/html/out.py"
+alias semi="cd $HOME/etc/dgaku/semi"
+# alias log="python /Volumes/SD/dgaku/study_log/html/out.py"
 alias tl="tmux ls"
 alias kj="java -jar $1"
 # cd md dir
