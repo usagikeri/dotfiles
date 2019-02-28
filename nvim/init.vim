@@ -136,6 +136,7 @@ Plug 'junegunn/vim-plug', {'dir': '~/.vim/plugged/vim-plug/autoload'}
 Plug 'Shougo/vimproc.vim' , {'do': 'make'}
 Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins' }
 Plug 'ervandew/supertab'
+Plug 'nathanaelkane/vim-indent-guides'
 " Python
 Plug 'zchee/deoplete-jedi', {'for': 'python'}
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
@@ -152,7 +153,6 @@ Plug 'jistr/vim-nerdtree-tabs'
 " Visual
 Plug 'itchyny/lightline.vim'
 Plug 'simeji/winresizer'
-Plug 'Yggdroot/indentLine'
 " FZF
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim',
@@ -227,10 +227,11 @@ let g:fzf_action = {
 \}
 " Default fzf layout
 let g:fzf_layout = { 'down': '~30%' }
-" Fzf key-map
-nnoremap <silent><Leader>f :FzfFiles<CR>
-nnoremap <silent><Leader>b :FzfBuffers<CR>
-nnoremap <silent><Leader>t :FzfTags<CR>
+" fzf key-map
+nnoremap <silent><Leader><C-f> :FzfFiles<CR>
+nnoremap <silent><Leader><C-f>b :FzfBuffers<CR>
+nnoremap <silent><Leader><C-f>t :FzfTags<CR>
+nnoremap <silent><Leader><C-f>l :FzfBLines<CR>
 " =================================
 
 " vim-expand-region settings
@@ -301,7 +302,30 @@ function! Autopep8()
 endfunction
 
 autocmd FileType python nnoremap <silent><Leader>ap :call Autopep8()<CR>
+" vim-indent-guides
+" =================================
 
+let g:indent_guides_auto_colors=0
+let g:indent_guides_enable_on_vim_startup=1
+let g:indent_guides_guide_size=1
+py3 << END
+import vim
+import random
+
+oddColor = random.randint(0, 255)
+evenColor = random.randint(0, 255)
+oddCmd = ":hi IndentGuidesOdd  ctermbg={}"
+evenCmd = ":hi IndentGuidesEven ctermbg={}"
+
+vim.command(oddCmd.format(oddColor))
+vim.command(evenCmd.format(evenColor))
+END
+
+"let g:indent_guides_auto_colors=0
+"autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd   ctermbg=232
+"autocmd VimEnter,Colorscheme * :hi IndentGuidesEven  ctermbg=240
+"let g:indent_guides_enable_on_vim_startup=1
+"let g:indent_guides_guide_size=1
 
 " lightline settings
 " =================================
