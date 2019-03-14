@@ -149,7 +149,7 @@ Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
 Plug 'kannokanno/previm', {'for': 'markdown'}
 Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
-  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
+  \ 'for': 'markdown'}
 " File
 Plug 'scrooloose/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
