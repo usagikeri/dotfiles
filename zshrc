@@ -31,8 +31,6 @@ alias kvc="networksetup -connectpppoeservice kobasemi"
 alias kvd="networksetup -disconnectpppoeservice kobasemi"
 # PDFの二段組を一段に変換する
 alias k2p="k2pdfopt -ui- -n -w 1.0s -h 1.0s -om 1,0.5,1,0.5 -c -wrap- -col 2"
-# fs
-alias fs="rlwrap fs"
 
 # Docker Settings
 alias derm="docker ps -f 'status=exited' -q | xargs docker rm -f"
