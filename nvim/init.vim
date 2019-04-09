@@ -17,6 +17,9 @@ set encoding=utf-8
 " Replace : ;
 noremap ; :
 noremap : ;
+" escape
+vnoremap u <ESC>
+inoremap <silent> <C-j> <ESC>
 " ====================
 
 " Display Settings
@@ -34,6 +37,9 @@ set cole=0
 set visualbell t_vb=
 " Always Display Status-Line
 set laststatus=2
+" Change buffer
+nnoremap <silent> <C-h> :bprev<CR>
+nnoremap <silent> <C-l> :bnext<CR>
 " ====================
 
 " Tab and Indention Settings
@@ -149,7 +155,7 @@ Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
 Plug 'kannokanno/previm', {'for': 'markdown'}
 Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
-  \ 'for': 'markdown'}
+  \ 'for': ['markdown', 'yaml']}
 " File
 Plug 'scrooloose/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
