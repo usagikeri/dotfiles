@@ -228,3 +228,12 @@ if [ -f '/Users/shinya/google-cloud-sdk/completion.zsh.inc' ]; then source '/Use
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+precmd() {
+   pwd=$(pwd)
+   cwd=${pwd##*/}
+   print -Pn "\e]0;$cwd\a"
+}
+ 
+preexec() {
+   printf "\033]0;%s\a" "${1%% *} | $cwd"
+}
