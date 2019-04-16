@@ -38,8 +38,10 @@ set visualbell t_vb=
 " Always Display Status-Line
 set laststatus=2
 " Change buffer
+set hidden
 nnoremap <silent> <C-h> :bprev<CR>
 nnoremap <silent> <C-l> :bnext<CR>
+
 " ====================
 
 " Tab and Indention Settings
