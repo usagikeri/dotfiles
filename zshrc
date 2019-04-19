@@ -215,10 +215,7 @@ zstyle ':vcs_info:git:*' stagedstr "%F{yellow}!"
 zstyle ':vcs_info:git:*' unstagedstr "%F{red}+"
 zstyle ':vcs_info:*' formats "%F{green}%c%u[%b]%f"
 zstyle ':vcs_info:*' actionformats '[%b|%a]'
-precmd () {
-    vcs_info
-}
-RPROMPT='${vcs_info_msg_0_}'
+
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/shinya/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/shinya/google-cloud-sdk/path.zsh.inc'; fi
@@ -237,3 +234,7 @@ precmd() {
 preexec() {
    printf "\033]0;%s\a" "${1%% *} | $cwd"
 }
+precmd () {
+    vcs_info
+}
+RPROMPT='${vcs_info_msg_0_}'
