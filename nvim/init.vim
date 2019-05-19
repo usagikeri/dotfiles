@@ -1,6 +1,5 @@
 " Vim Settings
 "
-
 " Leader-key Settings
 " ====================
 let mapleader = "\<Space>"
@@ -19,7 +18,7 @@ noremap ; :
 noremap : ;
 " escape
 vnoremap u <ESC>
-inoremap <silent> <C-j> <ESC>
+imap <silent> <C-j> <ESC>
 " ====================
 
 " Display Settings
@@ -187,6 +186,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'scrooloose/syntastic'
 Plug 'reireias/vim-cheatsheet'
+Plug 'mtth/scratch.vim'
 call plug#end()
 " ====================
 
