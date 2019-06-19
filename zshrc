@@ -34,6 +34,7 @@ alias k2p="k2pdfopt -ui- -n -w 1.0s -h 1.0s -om 1,0.5,1,0.5 -c -wrap- -col 2"
 
 # Docker Settings
 alias derm="docker ps -f 'status=exited' -q | xargs docker rm -f"
+alias dnrm="docker rmi $(docker images -f "dangling=true" -q)"
 alias darm="docker ps -a -q | xargs docker rm -f"
 alias djshell="docker run -it --rm parana/jshell jshell"
 
@@ -111,6 +112,7 @@ export EDITOR="nvim"
 export LS_COLORS="di=01;36"
 # prompt
 export PS1="%F{2}%C$%f"
+#export PS1="%K{0}`echo -e "\U1F433"` %F{7}[%c]$%k%"
 
 # gcloud
 export GOOGLE_APPLICATION_CREDENTIALS=/Volumes/SD/research/julipy/googleCloudSpeechAPI/UWFproject-008e948e42d7.json
