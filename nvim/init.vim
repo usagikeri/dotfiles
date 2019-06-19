@@ -101,25 +101,27 @@ set backspace=indent,eol,start
 " Insert a new line
 nnoremap <silent><Leader>j :<C-u>call append(expand('.'), '')<Cr>j
 " Insert a new Space
-nmap <silent><Leader><Space> i<Space><ESC>
+nnoremap <silent><Leader><Space> i<Space><ESC>
 " All Copy
-nnoremap <silent><Leader>y :%y<Cr>
+nnoremap <silent><Leader>y :<C-u>%y<Cr>
 " Horizon split
-nnoremap <silent><Leader>hs :split<Cr>
+nnoremap <silent><Leader>hs :<C-u>split<Cr>
 " Vertical split
-nnoremap <silent><Leader>vs :vsplit<Cr>
+nnoremap <silent><Leader>vs :<C-u>vsplit<Cr>
 " Reload vimrc
-nnoremap <silent><Leader>rv :source ~/.config/nvim/init.vim<Cr>
+nnoremap <silent><Leader>rv :<C-u>source ~/.config/nvim/init.vim<Cr>
 " Trailing Whitespace
-nnoremap <silent><Leader>w :FixWhitespace<CR>
+nnoremap <silent><Leader>w :<C-u>FixWhitespace<CR>
 " Close Buf
-nnoremap <silent><Leader>q :q<CR>
-nnoremap <silent><Leader>q1 :q!<CR>
+nnoremap <silent><Leader>q :<C-u>q<CR>
+nnoremap <silent><Leader>q1 :<C-u>q!<CR>
 " No Hilight
-nnoremap <silent><Leader>n :noh<CR>
-" got build and run
-autocmd FileType go nmap <leader>b  <Plug>(go-build)
-autocmd FileType go nmap <leader>r  <Plug>(go-run)
+nnoremap <silent><Leader>n :<C-u>noh<CR>
+" go build and run
+autocmd FileType go nnoremap <leader>b  <Plug>(go-build)
+autocmd FileType go nnoremap <leader>r  <Plug>(go-run)
+" remove doublequotation
+noremap <silent><Leader>t :<C-u>RDQ<Cr>
 " ====================
 
 " Quick run
@@ -137,6 +139,33 @@ autocmd bufnewfile,bufread *.tex nnoremap <leader>a :!texpdf %
 let g:python_host_prog=$PYENV_ROOT . '/shims/python2'
 let g:python3_host_prog=$PYENV_ROOT . '/shims/python3'
 " ====================
+
+
+" My Function
+" ====================
+" Remove Double Quotation
+command! RDQ call RDQ()
+function RDQ()
+let line=getline(".")
+let repl=substitute(line, '"', "'", "g")
+call setline(".", repl)
+
+let line=getline(".")
+let repl=substitute(line, '—', "", "g")
+call setline(".", repl)
+
+let line=getline(".")
+let repl=substitute(line, '', " ", "g")
+call setline(".", repl)
+
+let line=getline(".")
+let repl=substitute(line, '\.', "\.\r\r", "g")
+call setline(".", repl)
+
+call setreg("+", repl)
+endfunction
+" ====================
+
 
 " Vim-Plug Settings
 " ====================
@@ -162,6 +191,7 @@ Plug 'prettier/vim-prettier', {
 " File
 Plug 'scrooloose/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
+Plug 'mileszs/ack.vim'
 " Visual
 Plug 'itchyny/lightline.vim'
 Plug 'simeji/winresizer'
@@ -188,6 +218,12 @@ Plug 'scrooloose/syntastic'
 Plug 'reireias/vim-cheatsheet'
 Plug 'mtth/scratch.vim'
 call plug#end()
+" ====================
+
+
+" ag settings
+" ====================
+let g:ackprg = 'ag --nogroup --nocolor --column'
 " ====================
 
 " vim-go settings
@@ -241,10 +277,11 @@ let g:fzf_action = {
 " Default fzf layout
 let g:fzf_layout = { 'down': '~30%' }
 " fzf key-map
-nnoremap <silent><Leader><C-f> :FzfFiles<CR>
-nnoremap <silent><Leader><C-f>b :FzfBuffers<CR>
-nnoremap <silent><Leader><C-f>t :FzfTags<CR>
-nnoremap <silent><Leader><C-f>l :FzfBLines<CR>
+nnoremap <silent><C-f>f :FzfFiles<CR>
+nnoremap <silent><C-f>b :FzfBuffers<CR>
+nnoremap <silent><C-f>t :FzfTags<CR>
+nnoremap <silent><C-f>l :FzfBLines<CR>
+nnoremap <silent><C-f>a :FzfBLines<CR>
 " =================================
 
 " vim-expand-region settings
@@ -315,9 +352,9 @@ function! Autopep8()
 endfunction
 
 autocmd FileType python nnoremap <silent><Leader>ap :call Autopep8()<CR>
+
 " vim-indent-guides
 " =================================
-
 let g:indent_guides_auto_colors=0
 let g:indent_guides_enable_on_vim_startup=1
 let g:indent_guides_guide_size=1
