@@ -1,27 +1,31 @@
 # alias
+# vim
 alias mvim="/Applications/MacVim.app/Contents/bin/gvim"
 alias vi="nvim"
 alias vim="nvim"
 alias ctags="/usr/local/bin/ctags"
+# python
 alias p="python"
 alias ip="ipython"
 alias jl="jupyter lab"
+# ls settings
 export LSCOLORS=gxfxcxdxbxegedabagacad
 alias ls="ls -G"
 alias ll="ls -lG"
 alias la="ls -laG"
 alias lsl="ls -1G"
+# lisp
 alias alisp="/usr/local/acl10.1.64/alisp"
 alias sbcl="rlwrap sbcl"
 alias clisp="rlwrap clisp"
+# semi
 alias semi="cd $HOME/etc/dgaku/semi"
-# alias log="python /Volumes/SD/dgaku/study_log/html/out.py"
+# tmux
 alias tl="tmux ls"
+# kotlin compile
 alias kj="java -jar $1"
 # cd md dir
 alias mdd="cd ~/GoogleDrive/md"
-# cd SD
-alias sd="cd /Volumes/SD"
 # source ~/.zshrc
 alias shread="source ~/.zshrc"
 # Pukiwiki to Markdown
@@ -29,14 +33,13 @@ alias m2p="md2pukiwiki"
 # Kobasemi VPN Connect or Disconnct
 alias kvc="networksetup -connectpppoeservice kobasemi"
 alias kvd="networksetup -disconnectpppoeservice kobasemi"
-# PDFの二段組を一段に変換する
-alias k2p="k2pdfopt -ui- -n -w 1.0s -h 1.0s -om 1,0.5,1,0.5 -c -wrap- -col 2"
-
 # Docker Settings
 alias derm="docker ps -f 'status=exited' -q | xargs docker rm -f"
 alias dnrm="docker rmi $(docker images -f "dangling=true" -q)"
 alias darm="docker ps -a -q | xargs docker rm -f"
 alias djshell="docker run -it --rm parana/jshell jshell"
+# lazygit
+alias lg="lazygit"
 
 export DISPLAY_MAC="ifconfig en0 | grep inet | awk '$1=="inet" {print $2}':0"
 function startx() {
