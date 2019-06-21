@@ -3,7 +3,9 @@
 
 # 連番生成
 
+```
 g<C-a>
+```
 
 
 # 選択範囲置換
@@ -19,10 +21,14 @@ g<C-a>
 like find command
 
 ```
-nnoremap <silent><C-f>f :FzfFiles<CR>
-nnoremap <silent><C-f>b :FzfBuffers<CR>
-nnoremap <silent><C-f>t :FzfTags<CR>
-noremap <silent><C-f>l :FzfBLines<CR>
+nnoremap <silent><C-f>a :FzfAg<CR> //grep current dir
+nnoremap <silent><C-f>b :FzfBuffers<CR> //buffer
+nnoremap <silent><C-f>c :FzfCommands<CR> //vim command
+nnoremap <silent><C-f>f :FzfFiles<CR> //file
+nnoremap <silent><C-f>h :FzfHelptags<CR> //vim help
+nnoremap <silent><C-f>l :FzfLines<CR> //line in buffers
+nnoremap <silent><C-f>j :FzfLines<CR> //line in current burrer 
+nnoremap <silent><C-f>t :FzfTags<CR> //tags
 ```
 
 # Ack
