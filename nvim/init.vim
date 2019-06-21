@@ -18,7 +18,7 @@ noremap ; :
 noremap : ;
 " escape
 vnoremap u <ESC>
-imap <silent> <C-j> <ESC>
+inoremap <silent> <C-j> <ESC>
 " ====================
 
 " Display Settings
@@ -38,8 +38,8 @@ set visualbell t_vb=
 set laststatus=2
 " Change buffer
 set hidden
-nnoremap <silent> <C-j> :bprev<CR>
-nnoremap <silent> <C-k> :bnext<CR>
+nnoremap <silent> <Leader>; :bprev<CR>
+nnoremap <silent> <Leader>' :bnext<CR>
 
 set imdisable
 
@@ -145,7 +145,7 @@ let g:python3_host_prog=$PYENV_ROOT . '/shims/python3'
 " ====================
 " Remove Double Quotation
 command! RDQ call RDQ()
-function RDQ()
+function! RDQ()
 let line=getline(".")
 let repl=substitute(line, '"', "'", "g")
 call setline(".", repl)
@@ -277,11 +277,14 @@ let g:fzf_action = {
 " Default fzf layout
 let g:fzf_layout = { 'down': '~30%' }
 " fzf key-map
-nnoremap <silent><C-f>f :FzfFiles<CR>
+nnoremap <silent><C-f>a :FzfAg<CR>
 nnoremap <silent><C-f>b :FzfBuffers<CR>
+nnoremap <silent><C-f>c :FzfCommands<CR>
+nnoremap <silent><C-f>f :FzfFiles<CR>
+nnoremap <silent><C-f>h :FzfHelptags<CR>
+nnoremap <silent><C-f>l :FzfLines<CR>
+nnoremap <silent><C-f>j :FzfBLines<CR>
 nnoremap <silent><C-f>t :FzfTags<CR>
-nnoremap <silent><C-f>l :FzfBLines<CR>
-nnoremap <silent><C-f>a :FzfBLines<CR>
 " =================================
 
 " vim-expand-region settings
