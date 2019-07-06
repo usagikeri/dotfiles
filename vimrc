@@ -1,5 +1,6 @@
 " Vim Settings
 "
+
 " Leader-key Settings
 " ====================
 let mapleader = "\<Space>"
@@ -16,9 +17,6 @@ set encoding=utf-8
 " Replace : ;
 noremap ; :
 noremap : ;
-" escape
-vnoremap u <ESC>
-inoremap <silent> <C-j> <ESC>
 " ====================
 
 " Display Settings
@@ -36,13 +34,8 @@ set cole=0
 set visualbell t_vb=
 " Always Display Status-Line
 set laststatus=2
-" Change buffer
-set hidden
-nnoremap <silent> <Leader>; :bprev<CR>
-nnoremap <silent> <Leader>' :bnext<CR>
-
-set imdisable
-
+" ESC change to Ctrl + j
+imap <silent> <C-j> <ESC>
 " ====================
 
 " Tab and Indention Settings
@@ -101,27 +94,25 @@ set backspace=indent,eol,start
 " Insert a new line
 nnoremap <silent><Leader>j :<C-u>call append(expand('.'), '')<Cr>j
 " Insert a new Space
-nnoremap <silent><Leader><Space> i<Space><ESC>
+nmap <silent><Leader><Space> i<Space><ESC>
 " All Copy
-nnoremap <silent><Leader>y :<C-u>%y<Cr>
+nnoremap <silent><Leader>y :%y<Cr>
 " Horizon split
-nnoremap <silent><Leader>hs :<C-u>split<Cr>
+nnoremap <silent><Leader>hs :split<Cr>
 " Vertical split
-nnoremap <silent><Leader>vs :<C-u>vsplit<Cr>
+nnoremap <silent><Leader>vs :vsplit<Cr>
 " Reload vimrc
-nnoremap <silent><Leader>rv :<C-u>source ~/.config/nvim/init.vim<Cr>
+nnoremap <silent><Leader>rv :source ~/.config/nvim/init.vim<Cr>
 " Trailing Whitespace
-nnoremap <silent><Leader>w :<C-u>FixWhitespace<CR>
+nnoremap <silent><Leader>w :FixWhitespace<CR>
 " Close Buf
-nnoremap <silent><Leader>q :<C-u>q<CR>
-nnoremap <silent><Leader>q1 :<C-u>q!<CR>
+nnoremap <silent><Leader>q :q<CR>
+nnoremap <silent><Leader>q1 :q!<CR>
 " No Hilight
-nnoremap <silent><Leader>n :<C-u>noh<CR>
-" go build and run
-autocmd FileType go nnoremap <leader>b  <Plug>(go-build)
-autocmd FileType go nnoremap <leader>r  <Plug>(go-run)
-" remove doublequotation
-noremap <silent><Leader>t :<C-u>RDQ<Cr>
+nnoremap <silent><Leader>n :noh<CR>
+" got build and run
+autocmd FileType go nmap <leader>b  <Plug>(go-build)
+autocmd FileType go nmap <leader>r  <Plug>(go-run)
 " ====================
 
 " Quick run
@@ -140,33 +131,6 @@ let g:python_host_prog=$PYENV_ROOT . '/shims/python2'
 let g:python3_host_prog=$PYENV_ROOT . '/shims/python3'
 " ====================
 
-
-" My Function
-" ====================
-" Remove Double Quotation
-command! RDQ call RDQ()
-function! RDQ()
-let line=getline(".")
-let repl=substitute(line, '"', "'", "g")
-call setline(".", repl)
-
-let line=getline(".")
-let repl=substitute(line, '—', "", "g")
-call setline(".", repl)
-
-let line=getline(".")
-let repl=substitute(line, '', " ", "g")
-call setline(".", repl)
-
-let line=getline(".")
-let repl=substitute(line, '\.[^0-9]', "\.\r\r", "g")
-call setline(".", repl)
-
-call setreg("+", repl)
-endfunction
-" ====================
-
-
 " Vim-Plug Settings
 " ====================
 call plug#begin('~/.vim/plugged')
@@ -174,7 +138,6 @@ Plug 'junegunn/vim-plug', {'dir': '~/.vim/plugged/vim-plug/autoload'}
 Plug 'Shougo/vimproc.vim' , {'do': 'make'}
 Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins' }
 Plug 'ervandew/supertab'
-Plug 'nathanaelkane/vim-indent-guides'
 " Python
 Plug 'zchee/deoplete-jedi', {'for': 'python'}
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
@@ -185,16 +148,13 @@ Plug 'fatih/vim-go', {'for': 'go'}
 " Markdown
 Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
 Plug 'kannokanno/previm', {'for': 'markdown'}
-Plug 'prettier/vim-prettier', {
-  \ 'do': 'yarn install',
-  \ 'for': ['markdown', 'yaml']}
 " File
 Plug 'scrooloose/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
-Plug 'mileszs/ack.vim'
 " Visual
 Plug 'itchyny/lightline.vim'
 Plug 'simeji/winresizer'
+Plug 'Yggdroot/indentLine'
 " FZF
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim',
@@ -216,26 +176,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'scrooloose/syntastic'
 Plug 'reireias/vim-cheatsheet'
-Plug 'mtth/scratch.vim'
-Plug 'glidenote/memolist.vim'
 call plug#end()
-" ====================
-
-" Memo Setting
-" ====================
-map <Leader><C-m>n  :MemoNew<CR>
-map <Leader><C-m>l  :MemoList<CR>
-map <Leader><C-m>g  :MemoGrep<CR>
-" ====================
-
-" SrcExpl
-" ====================
-let g:SrcExpl_UpdateTags = 1
-" ====================
-
-" ag settings
-" ====================
-let g:ackprg = 'ag --nogroup --nocolor --column'
 " ====================
 
 " vim-go settings
@@ -288,15 +229,10 @@ let g:fzf_action = {
 \}
 " Default fzf layout
 let g:fzf_layout = { 'down': '~30%' }
-" fzf key-map
-nnoremap <silent><C-f>a :FzfAg<CR>
-nnoremap <silent><C-f>b :FzfBuffers<CR>
-nnoremap <silent><C-f>c :FzfCommands<CR>
-nnoremap <silent><C-f>f :FzfFiles<CR>
-nnoremap <silent><C-f>h :FzfHelptags<CR>
-nnoremap <silent><C-f>l :FzfLines<CR>
-nnoremap <silent><C-f>j :FzfBLines<CR>
-nnoremap <silent><C-f>t :FzfTags<CR>
+" Fzf key-map
+nnoremap <silent><Leader>f :FzfFiles<CR>
+nnoremap <silent><Leader>b :FzfBuffers<CR>
+nnoremap <silent><Leader>t :FzfTags<CR>
 " =================================
 
 " vim-expand-region settings
@@ -368,29 +304,6 @@ endfunction
 
 autocmd FileType python nnoremap <silent><Leader>ap :call Autopep8()<CR>
 
-" vim-indent-guides
-" =================================
-let g:indent_guides_auto_colors=0
-let g:indent_guides_enable_on_vim_startup=1
-let g:indent_guides_guide_size=1
-py3 << END
-import vim
-import random
-
-oddColor = random.randint(0, 255)
-evenColor = random.randint(0, 255)
-oddCmd = ":hi IndentGuidesOdd  ctermbg={}"
-evenCmd = ":hi IndentGuidesEven ctermbg={}"
-
-vim.command(oddCmd.format(oddColor))
-vim.command(evenCmd.format(evenColor))
-END
-
-"let g:indent_guides_auto_colors=0
-"autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd   ctermbg=232
-"autocmd VimEnter,Colorscheme * :hi IndentGuidesEven  ctermbg=240
-"let g:indent_guides_enable_on_vim_startup=1
-"let g:indent_guides_guide_size=1
 
 " lightline settings
 " =================================
