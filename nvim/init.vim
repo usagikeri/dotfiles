@@ -274,7 +274,8 @@ let g:go_highlight_structs = 1
 " =================================
 map <C-n> <plug>NERDTreeTabsToggle<CR>
 let g:NERDTreeShowBookmarks=1
-let NERDTreeWinSize=20
+let NERDTreeWinSize=30
+"autocmd vimenter * NERDTree
 " =================================
 
 " fzf.vim settings
@@ -290,7 +291,7 @@ let g:fzf_action = {
 let g:fzf_layout = { 'down': '~30%' }
 " fzf key-map
 nnoremap <silent><C-f>a :FzfAg<CR>
-nnoremap <silent><C-f>b :FzfBuffers<CR>
+nnoremap <silent><C-m> :FzfBuffers<CR>
 nnoremap <silent><C-f>c :FzfCommands<CR>
 nnoremap <silent><C-f>f :FzfFiles<CR>
 nnoremap <silent><C-f>h :FzfHelptags<CR>
