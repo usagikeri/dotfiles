@@ -105,9 +105,9 @@ nnoremap <silent><Leader><Space> i<Space><ESC>
 " All Copy
 nnoremap <silent><Leader>y :<C-u>%y<Cr>
 " Horizon split
-nnoremap <silent><Leader>hs :<C-u>split<Cr>
+nnoremap <silent>sh :<C-u>split<Cr>
 " Vertical split
-nnoremap <silent><Leader>vs :<C-u>vsplit<Cr>
+nnoremap <silent>sv :<C-u>vsplit<Cr>
 " Reload vimrc
 nnoremap <silent><Leader>rv :<C-u>source ~/.config/nvim/init.vim<Cr>
 " Trailing Whitespace
