@@ -1,0 +1,8 @@
+#!/bin/zsh
+
+tmux split-window -h -p 35
+tmux split-window -v -p 50
+tmux set-window-option synchronize-panes on
+tmux select-pane -L
+clear
+tmux set-window-option synchronize-panes off
