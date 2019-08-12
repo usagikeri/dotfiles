@@ -19,6 +19,8 @@ noremap : ;
 " escape
 vnoremap u <ESC>
 inoremap <silent> <C-j> <ESC>
+" nop s
+nnoremap s <Nop>
 " ====================
 
 " Display Settings
@@ -95,6 +97,12 @@ inoremap <C-h> <BS>
 " Activate back space key
 set backspace=indent,eol,start
 " ====================
+
+" Vim-Tab Settings
+" ====================
+noremap st :<C-u>tabnew<CR>
+noremap <tab> gt
+noremap <s-tab> gt
 
 " Leader Key Commands
 " ====================
@@ -291,7 +299,7 @@ let g:fzf_action = {
 let g:fzf_layout = { 'down': '~30%' }
 " fzf key-map
 nnoremap <silent><C-f>a :FzfAg<CR>
-nnoremap <silent><C-m> :FzfBuffers<CR>
+nnoremap <silent><C-f>m :FzfBuffers<CR>
 nnoremap <silent><C-f>c :FzfCommands<CR>
 nnoremap <silent><C-f>f :FzfFiles<CR>
 nnoremap <silent><C-f>h :FzfHelptags<CR>
