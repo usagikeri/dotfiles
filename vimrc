@@ -1,6 +1,10 @@
+" MacVim Settings
+" ====================
+set background=dark
+colorscheme desert
+
 " Vim Settings
 "
-
 " Leader-key Settings
 " ====================
 let mapleader = "\<Space>"
@@ -17,6 +21,11 @@ set encoding=utf-8
 " Replace : ;
 noremap ; :
 noremap : ;
+" escape
+vnoremap u <ESC>
+inoremap <silent> <C-j> <ESC>
+" nop s
+nnoremap s <Nop>
 " ====================
 
 " Display Settings
@@ -34,14 +43,20 @@ set cole=0
 set visualbell t_vb=
 " Always Display Status-Line
 set laststatus=2
-" ESC change to Ctrl + j
-imap <silent> <C-j> <ESC>
+" Change buffer
+set hidden
+nnoremap <silent> <Leader>; :bprev<CR>
+nnoremap <silent> <Leader>' :bnext<CR>
+
+set imdisable
+
 " ====================
 
 " Tab and Indention Settings
 " ====================
 set expandtab
 set tabstop=4
+set shiftwidth=4
 " Continue indention
 set autoindent
 " ====================
@@ -89,30 +104,38 @@ inoremap <C-h> <BS>
 set backspace=indent,eol,start
 " ====================
 
+" Vim-Tab Settings
+" ====================
+noremap st :<C-u>tabnew<CR>
+noremap <tab> gt
+noremap <s-tab> gt
+
 " Leader Key Commands
 " ====================
 " Insert a new line
 nnoremap <silent><Leader>j :<C-u>call append(expand('.'), '')<Cr>j
 " Insert a new Space
-nmap <silent><Leader><Space> i<Space><ESC>
+nnoremap <silent><Leader><Space> i<Space><ESC>
 " All Copy
-nnoremap <silent><Leader>y :%y<Cr>
+nnoremap <silent><Leader>y :<C-u>%y<Cr>
 " Horizon split
-nnoremap <silent><Leader>hs :split<Cr>
+nnoremap <silent>sh :<C-u>split<Cr>
 " Vertical split
-nnoremap <silent><Leader>vs :vsplit<Cr>
+nnoremap <silent>sv :<C-u>vsplit<Cr>
 " Reload vimrc
-nnoremap <silent><Leader>rv :source ~/.config/nvim/init.vim<Cr>
+nnoremap <silent><Leader>rv :<C-u>source ~/.config/nvim/init.vim<Cr>
 " Trailing Whitespace
-nnoremap <silent><Leader>w :FixWhitespace<CR>
+nnoremap <silent><Leader>w :<C-u>FixWhitespace<CR>
 " Close Buf
-nnoremap <silent><Leader>q :q<CR>
-nnoremap <silent><Leader>q1 :q!<CR>
+nnoremap <silent><Leader>q :<C-u>q<CR>
+nnoremap <silent><Leader>q1 :<C-u>q!<CR>
 " No Hilight
-nnoremap <silent><Leader>n :noh<CR>
-" got build and run
-autocmd FileType go nmap <leader>b  <Plug>(go-build)
-autocmd FileType go nmap <leader>r  <Plug>(go-run)
+nnoremap <silent><Leader>n :<C-u>noh<CR>
+" go build and run
+autocmd FileType go nnoremap <leader>b  <Plug>(go-build)
+autocmd FileType go nnoremap <leader>r  <Plug>(go-run)
+" remove doublequotation
+noremap <silent><Leader>t :<C-u>RDQ<Cr>
 " ====================
 
 " Quick run
