@@ -51,6 +51,7 @@ set imdisable
 " ====================
 set expandtab
 set tabstop=4
+set shiftwidth=4
 " Continue indention
 set autoindent
 " ====================
@@ -382,6 +383,7 @@ autocmd FileType python nnoremap <silent><Leader>ap :call Autopep8()<CR>
 let g:indent_guides_auto_colors=0
 let g:indent_guides_enable_on_vim_startup=1
 let g:indent_guides_guide_size=1
+let g:indent_guides_start_level = 1
 py3 << END
 import vim
 import random
@@ -395,11 +397,8 @@ vim.command(oddCmd.format(oddColor))
 vim.command(evenCmd.format(evenColor))
 END
 
-"let g:indent_guides_auto_colors=0
 "autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd   ctermbg=232
 "autocmd VimEnter,Colorscheme * :hi IndentGuidesEven  ctermbg=240
-"let g:indent_guides_enable_on_vim_startup=1
-"let g:indent_guides_guide_size=1
 
 " lightline settings
 " =================================
