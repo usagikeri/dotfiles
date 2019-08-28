@@ -108,7 +108,7 @@ set backspace=indent,eol,start
 " ====================
 noremap st :<C-u>tabnew<CR>
 noremap <tab> gt
-noremap <s-tab> gt
+noremap <S-tab> gT
 
 " Leader Key Commands
 " ====================
