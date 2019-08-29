@@ -2,6 +2,7 @@
 " ====================
 set background=dark
 colorscheme desert
+set guifont=Ricty\ Discord\ for\ Powerline:h12
 
 " Vim Settings
 "
