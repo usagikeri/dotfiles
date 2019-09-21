@@ -110,6 +110,25 @@ set backspace=indent,eol,start
 noremap st :<C-u>tabnew<CR>
 noremap <tab> gt
 noremap <S-tab> gT
+" ====================
+
+" Split Settings
+" ====================
+" Horizon split
+nnoremap <silent>s- :<C-u>split<Cr>
+" Vertical split
+nnoremap <silent>s= :<C-u>vsplit<Cr>
+" Move Left
+noremap <silent>sh <C-w>h
+" Move Right
+noremap <silent>sl <C-w>l
+" Move Up
+noremap <silent>sk <C-w>k
+" Move Down
+noremap <silent>sj <C-w>j
+" Close
+noremap <silent>sq <C-w>q
+" ====================
 
 " Leader Key Commands
 " ====================
@@ -119,12 +138,8 @@ nnoremap <silent><Leader>j :<C-u>call append(expand('.'), '')<Cr>j
 nnoremap <silent><Leader><Space> i<Space><ESC>
 " All Copy
 nnoremap <silent><Leader>y :<C-u>%y<Cr>
-" Horizon split
-nnoremap <silent>sh :<C-u>split<Cr>
-" Vertical split
-nnoremap <silent>sv :<C-u>vsplit<Cr>
 " Reload vimrc
-nnoremap <silent><Leader>rv :<C-u>source ~/.config/nvim/init.vim<Cr>
+nnoremap <silent><Leader>r :<C-u>source ~/.vim/vimrc<Cr>
 " Trailing Whitespace
 nnoremap <silent><Leader>w :<C-u>FixWhitespace<CR>
 " Close Buf
@@ -135,6 +150,8 @@ nnoremap <silent><Leader>n :<C-u>noh<CR>
 " go build and run
 autocmd FileType go nnoremap <leader>b  <Plug>(go-build)
 autocmd FileType go nnoremap <leader>r  <Plug>(go-run)
+" all select
+nnoremap <silent><Leader>v gg <S-v> G
 " remove doublequotation
 noremap <silent><Leader>t :<C-u>RDQ<Cr>
 " ====================
