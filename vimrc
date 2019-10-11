@@ -154,6 +154,8 @@ autocmd FileType go nnoremap <leader>r  <Plug>(go-run)
 nnoremap <silent><Leader>v gg <S-v> G
 " remove doublequotation
 noremap <silent><Leader>t :<C-u>RDQ<Cr>
+" Terminal mode esckpe
+tnoremap <silent><C-j> <C-\><C-n>
 " ====================
 
 " Quick run
@@ -174,7 +176,8 @@ let g:python3_host_prog=$PYENV_ROOT . '/shims/python3'
 
 " Vim-Plug Settings
 " ====================
-call plug#begin('~/.vim/plugged')
+"call plug#begin('~/.vim/plugged')
+call plug#begin('~/.vim/plugged/')
 Plug 'junegunn/vim-plug', {'dir': '~/.vim/plugged/vim-plug/autoload'}
 Plug 'Shougo/vimproc.vim' , {'do': 'make'}
 Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins' }
@@ -211,6 +214,7 @@ Plug 'vim-scripts/taglist.vim'
 " Formater
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'bronson/vim-trailing-whitespace'
+Plug 'prettier/vim-prettier'
 " Git
 Plug 'tpope/vim-fugitive'
 " Other
@@ -271,9 +275,14 @@ let g:fzf_action = {
 " Default fzf layout
 let g:fzf_layout = { 'down': '~30%' }
 " Fzf key-map
-nnoremap <silent><Leader>f :FzfFiles<CR>
-nnoremap <silent><Leader>b :FzfBuffers<CR>
-nnoremap <silent><Leader>t :FzfTags<CR>
+nnoremap <silent><C-f>a :FzfAg<CR>
+nnoremap <silent><C-f>m :FzfBuffers<CR>
+nnoremap <silent><C-f>c :FzfCommands<CR>
+nnoremap <silent><C-f>f :FzfFiles<CR>
+nnoremap <silent><C-f>h :FzfHelptags<CR>
+nnoremap <silent><C-f>l :FzfLines<CR>
+nnoremap <silent><C-f>j :FzfBLines<CR>
+nnoremap <silent><C-f>t :FzfTags<CR>
 " =================================
 
 " vim-expand-region settings
@@ -286,8 +295,8 @@ vmap <C-v> <Plug>(expand_region_shrink
 " =================================
 let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_toc_autofit = 1
-let g:vim_markdown_conceal = 0
-let g:tex_conceal = ""
+"let g:vim_markdown_conceal = 0
+"let g:tex_conceal = ""
 let g:vim_markdown_math = 1
 " =================================
 
