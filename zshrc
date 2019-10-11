@@ -126,7 +126,6 @@ export CLOUDSDK_PYTHON=/Users/shinya/.pyenv/versions/2.7.11/bin/python2.7
 # pyenv
 export PYENV_ROOT=$HOME/.pyenv
 export PATH=$PYENV_ROOT/bin:$PATH
-#alias pyenv="CFLAGS='-I$(brew --prefix openssl)/include' LDFLAGS='-L$(brew --prefix openssl)/lib' pyenv"
 
 if [ -d "${PYENV_ROOT}" ]; then
    export PATH=${PYENV_ROOT}/bin:$PATH
@@ -148,10 +147,6 @@ function mtcomp (){
         _files .
 }
 compdef mtcomp mt
-# Oni
-function oni(){
-        open -a /Volumes/SD/Applications/Oni.app/Contents/MacOS/Oni $1
-}
 # mkdir and cd
 function mkcd(){
         mkdir $1 && cd $1
@@ -207,6 +202,19 @@ fs() {
         fi
 }
 
+ta() {
+        local session
+        LF=$(printf '\\\012_')
+        LF=${LF%_}
+
+        session=`tmux ls | awk '{print $1}' | sed -e 's/:$//' | gsed '$a create new session' | fzf`
+        if [[ $session == "create new session" ]];then
+                tmux
+        else
+            tmux attach -t $session
+        fi
+}
+
 function select-history() {
   BUFFER=$(history -n -r 1 | fzf --no-sort +m --query "$LBUFFER" --prompt="History > ")
   CURSOR=$#BUFFER
@@ -246,23 +254,23 @@ precmd () {
 RPROMPT='${vcs_info_msg_0_}'
 
 # Tmux
-if [[ ! -n $TMUX && $- == *l* ]]; then
-  # get the IDs
-  ID="`tmux list-sessions`"
-  if [[ -z "$ID" ]]; then
-    tmux new-session
-  fi
-  create_new_session="Create New Session"
-  ID="$ID\n${create_new_session}:"
-  ID="`echo $ID | fzf | cut -d: -f1`"
-  if [[ "$ID" = "${create_new_session}" ]]; then
-    tmux new-session
-  elif [[ -n "$ID" ]]; then
-    tmux attach-session -t "$ID"
-  else
-    :  # Start terminal normally
-  fi
-fi
+#if [[ ! -n $TMUX && $- == *l* ]]; then
+#  # get the IDs
+#  ID="`tmux list-sessions`"
+#  if [[ -z "$ID" ]]; then
+#    tmux new-session
+#  fi
+#  create_new_session="Create New Session"
+#  ID="$ID\n${create_new_session}:"
+#  ID="`echo $ID | fzf | cut -d: -f1`"
+#  if [[ "$ID" = "${create_new_session}" ]]; then
+#    tmux new-session
+#  elif [[ -n "$ID" ]]; then
+#    tmux attach-session -t "$ID"
+#  else
+#    :  # Start terminal normally
+#  fi
+#fi
 
 function powerline_precmd() {
     PS1="$(powerline-shell --shell zsh $?)"
