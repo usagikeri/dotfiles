@@ -148,7 +148,7 @@ nnoremap <silent><Leader>v gg <S-v> G
 " remove doublequotation
 noremap <silent><Leader>t :<C-u>RDQ<Cr>
 " Terminal mode esckpe
-tnoremap <silent> <ESC> <C-\><C-n>
+tnoremap <silent><C-j> <C-\><C-n>
 " ====================
 
 " Quick run
