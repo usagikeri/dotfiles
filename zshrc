@@ -207,11 +207,19 @@ ta() {
         LF=$(printf '\\\012_')
         LF=${LF%_}
 
-        session=`tmux ls | awk '{print $1}' | sed -e 's/:$//' | gsed '$a create new session' | fzf`
+        session=`tmux ls 2>/dev/null`
+        if [ $? > "0" ];then
+            echo "tmux in not running"
+            return
+        fi
+
+        session=`echo $session | awk '{print $1}' | sed -e 's/:$//' | gsed '$a create new session' | fzf`
         if [[ $session == "create new session" ]];then
                 tmux
-        else
-            tmux attach -t $session
+            elif [[ $session = "" ]];then
+                echo $session
+            else
+                tmux attach -t $session
         fi
 }
 
