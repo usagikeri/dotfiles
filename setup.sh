@@ -21,6 +21,7 @@ ln -sf $PWD/zshrc ~/.zshrc
 ln -sf $PWD/tmux.conf ~/.tmux.conf
 ln -sf $PWD/nvim ~/.config/nvim
 ln -sf $PWD/vimrc ~/.vimrc
+ln -sf $PWD/tex/latexmkrc ~/.latexmkrc
 
 # Install vim-plug
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
