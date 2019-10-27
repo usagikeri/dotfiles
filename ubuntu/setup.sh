@@ -128,3 +128,13 @@ sudo echo '  }' > /etc/docker/daemon.json
 sudo echo '}' > /etc/docker/daemon.json
 sudo systemctl restart docker
 # =========================
+
+# dotfiles
+# =========================
+git clone https://github.com/usagikeri/dotfiles.git
+mkdir -p ~/.config/nvim/
+cp dotfiles/ubuntu/init.vim ~/.config/nvim/init.vim
+cat dotfiles/ubuntu/zshrc >> ~/.zshrc
+cp dotfiles/ubuntu/tmux.conf ~/.tmux.conf
+rm -rf ~/dotfiles
+# =========================
