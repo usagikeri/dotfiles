@@ -64,12 +64,18 @@ pyenv global 3.7.1
 sudo add-apt-repository ppa:neovim-ppa/stable
 sudo apt update
 sudo apt -y install neovim
+pip3 install pynvim
 # =========================
 
 # vim-plug
 # =========================
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+# =========================
+
+# vim-init
+# =========================
+nvim +PlugInstall
 # =========================
 
 # install go
@@ -108,6 +114,7 @@ sudo apt -y install ctags
 # =========================
 curl -fsSL get.docker.com -o get-docker.sh
 sudo sh get-docker.sh
+rm get-docker.sh
 # =========================
 
 # install gVisor
