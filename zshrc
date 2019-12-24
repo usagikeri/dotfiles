@@ -38,6 +38,8 @@ alias derm="docker ps -f 'status=exited' -q | xargs docker rm -f"
 alias dnrm="docker rmi $(docker images -f "dangling=true" -q)"
 alias darm="docker ps -a -q | xargs docker rm -f"
 alias djshell="docker run -it --rm parana/jshell jshell"
+# lazydocekr
+alias ldoc="lazydocker"
 # lazygit
 alias lg="lazygit"
 
@@ -159,7 +161,20 @@ function jcr(){
 function ml(){
     pandoc -s -f markdown -t html $1 | nocorrect lynx -stdin;
 }
+
+# Markdown to PDF like latex format
+function mp(){
+    mdname=$1
+    pdfname=`basename -s md $1`pdf
+    echo "Converting from $mdname to $pdfname"
+    pandoc $mdname -o $pdfname -N -t latex-smart --listings --pdf-engine=lualatex -V papersize=a4 -V ja=standerd -V documentclass=bxjsarticle -V classoption=pandoc -V classoption=jbase=11Q -V classoption=jafont=hiragino-pron
+    echo "done."
+}
+
+# ------------
+
 # fzf setting
+# ------------
 # export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git"'
 export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
 # fd - cd to selected directory
