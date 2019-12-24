@@ -40,8 +40,8 @@ set visualbell t_vb=
 set laststatus=2
 " Change buffer
 set hidden
-nnoremap <silent> <Leader>; :bprev<CR>
-nnoremap <silent> <Leader>' :bnext<CR>
+nnoremap <silent> <C-j> :bprev<CR>
+nnoremap <silent> <C-k> :bnext<CR>
 set imdisable
 " ====================
 
@@ -248,13 +248,6 @@ Plug 'glidenote/memolist.vim'
 call plug#end()
 " ====================
 
-" Memo Setting
-" ====================
-map <Leader><C-m>n  :MemoNew<CR>
-map <Leader><C-m>l  :MemoList<CR>
-map <Leader><C-m>g  :MemoGrep<CR>
-" ====================
-
 " SrcExpl
 " ====================
 let g:SrcExpl_UpdateTags = 1
@@ -318,7 +311,7 @@ let g:fzf_action = {
 let g:fzf_layout = { 'down': '~30%' }
 " fzf key-map
 nnoremap <silent><C-f>a :FzfAg<CR>
-nnoremap <silent><C-f>m :FzfBuffers<CR>
+nnoremap <silent><C-m> :FzfBuffers<CR>
 nnoremap <silent><C-f>c :FzfCommands<CR>
 nnoremap <silent><C-f>f :FzfFiles<CR>
 nnoremap <silent><C-f>h :FzfHelptags<CR>
