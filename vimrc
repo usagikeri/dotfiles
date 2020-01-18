@@ -46,9 +46,8 @@ set visualbell t_vb=
 set laststatus=2
 " Change buffer
 set hidden
-nnoremap <silent> <Leader>; :bprev<CR>
-nnoremap <silent> <Leader>' :bnext<CR>
-
+nnoremap <silent> <C-j> :bprev<CR>
+nnoremap <silent> <C-k> :bnext<CR>
 set imdisable
 
 " ====================
@@ -276,7 +275,7 @@ let g:fzf_action = {
 let g:fzf_layout = { 'down': '~30%' }
 " Fzf key-map
 nnoremap <silent><C-f>a :FzfAg<CR>
-nnoremap <silent><C-f>m :FzfBuffers<CR>
+nnoremap <C-m> :FzfBuffers<CR>
 nnoremap <silent><C-f>c :FzfCommands<CR>
 nnoremap <silent><C-f>f :FzfFiles<CR>
 nnoremap <silent><C-f>h :FzfHelptags<CR>
