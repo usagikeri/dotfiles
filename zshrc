@@ -177,14 +177,17 @@ function mp(){
 # ------------
 # export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git"'
 export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
+# fj - cd to registered directory
 fj() {
     if [ "$1" = "." ]; then
         echo $PWD >> ~/.fzfjump.conf
+        echo "$PWD registered"
     elif [ "$1" = "del" ]; then
         local dir
         dir=$(cat ~/.fzfjump.conf | fzf +m)
         num="${$(cat ~/.fzfjump.conf | grep -n -e "^$dir$" | head -n 1 | cut -d: -f 1)}d"
         sed -i '' $num ~/.fzfjump.conf
+        echo "$dir deleted"
     else
         local dir
         dir=$(cat ~/.fzfjump.conf | fzf +m) &&
