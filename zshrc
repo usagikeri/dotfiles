@@ -184,7 +184,6 @@ fj() {
         local dir
         dir=$(cat ~/.fzfjump.conf | fzf +m)
         num="${$(cat ~/.fzfjump.conf | grep -n -e "^$dir$" | head -n 1 | cut -d: -f 1)}d"
-        echo $num
         sed -i '' $num ~/.fzfjump.conf
     else
         local dir
