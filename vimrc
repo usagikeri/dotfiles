@@ -46,7 +46,7 @@ set visualbell t_vb=
 set laststatus=2
 " Change buffer
 set hidden
-nnoremap <silent> <C-j> :bprev<CR>
+nnoremap <silent> <C-h> :bprev<CR>
 nnoremap <silent> <C-k> :bnext<CR>
 set imdisable
 
@@ -415,3 +415,4 @@ function! LightlineMode()
   return winwidth(0) > 60 ? lightline#mode() : ''
 endfunction
 " =================================
+set conceallevel=0
