@@ -188,6 +188,10 @@ fj() {
         num="${$(cat ~/.fzfjump.conf | grep -n -e "^$dir$" | head -n 1 | cut -d: -f 1)}d"
         sed -i '' $num ~/.fzfjump.conf
         echo "$dir deleted"
+    elif [ "$1" = "help" ]; then
+        echo "fj # fzf jump"
+        echo "fj add # registar"
+        echo "fj del # delete"
     else
         local dir
         dir=$(cat ~/.fzfjump.conf | fzf +m) &&
