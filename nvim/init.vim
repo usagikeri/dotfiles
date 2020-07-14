@@ -3,6 +3,8 @@
 " Leader-key Settings
 " ====================
 let mapleader = "\<Space>"
+" nop s
+nnoremap s <Nop>
 " ====================
 
 " Character Settings
@@ -18,15 +20,17 @@ noremap ; :
 noremap : ;
 " escape
 vnoremap u <ESC>
-inoremap <silent> <C-j> <ESC>
-" nop s
-nnoremap s <Nop>
+" inoremap <silent><C-j> <ESC>
+" key timeout
+set timeoutlen=250
+set ttimeoutlen=10
 " ====================
 
 " Display Settings
 " ====================
 " Display line number
-set number
+nnoremap <Leader>n :set number<CR>
+nnoremap <Leader>nn :set nonumber<CR>
 " Highlight the corresponding parentheses
 set showmatch
 " Inactive conceal
@@ -40,16 +44,16 @@ set visualbell t_vb=
 set laststatus=2
 " Change buffer
 set hidden
-nnoremap <silent> <C-h> :bprev<CR>
-nnoremap <silent> <C-k> :bnext<CR>
+nnoremap <silent> <C-p> :bprev<CR>
+nnoremap <silent> <C-n> :bnext<CR>
 set imdisable
 " ====================
 
 " Tab and Indention Settings
 " ====================
 set expandtab
-set tabstop=4
-set shiftwidth=4
+set tabstop=2
+set shiftwidth=2
 " Continue indention
 set autoindent
 " ====================
@@ -57,9 +61,12 @@ set autoindent
 " Clipboard Settings
 " ====================
 " Share Clipboard
-set clipboard=unnamed
+"set clipboard=unnamed
+nnoremap <silent><Leader>p "*p
+nnoremap <silent><Leader>y "*y
+inoremap <silent><Leader>y "*y
 " new line paste
-nnoremap <silent><Leader>p <silent>o<ESC>p
+nnoremap <silent><Leader>P <silent>o<ESC>p
 autocmd InsertLeave * set nopaste
 " ====================
 
@@ -71,6 +78,7 @@ set smartcase
 set hlsearch
 " Toggle highlighting by pressing the ESC key twice
 nnoremap <silent><Esc><Esc> :nohlsearch<CR>
+hi Search ctermbg=141
 " ====================
 
 " Move Settings
@@ -96,6 +104,10 @@ inoremap <C-e> <ESC>A
 inoremap <C-h> <BS>
 " Activate back space key
 set backspace=indent,eol,start
+" Vim Note
+nnoremap <silent><Enter> 0t)gf
+" Mouse
+set mouse=a
 " ====================
 
 " Vim-Tab Settings
@@ -108,9 +120,9 @@ noremap <S-tab> gT
 " Split Settings
 " ====================
 " Horizon split
-nnoremap <silent>s- :<C-u>split<Cr>
+nnoremap <silent>ss :<C-u>split<Cr>
 " Vertical split
-nnoremap <silent>s= :<C-u>vsplit<Cr>
+nnoremap <silent>sv :<C-u>vsplit<Cr>
 " Move Left
 noremap <silent>sh <C-w>h
 " Move Right
@@ -122,7 +134,7 @@ noremap <silent>sj <C-w>j
 " Close
 noremap <silent>sq <C-w>q
 " New buf
-noremap <silent>sn enew
+"noremap <silent>sn :enew<CR>
 " ====================
 
 " Leader Key Commands
@@ -134,14 +146,12 @@ nnoremap <silent><Leader><Space> i<Space><ESC>
 " All Copy
 nnoremap <silent><Leader>y :<C-u>%y<Cr>
 " Reload vimrc
-nnoremap <silent><Leader>r :<C-u>source ~/.vimrc<Cr>
+nnoremap <silent><Leader>r :<C-u>source ~/.config/nvim/init.vim<Cr>
 " Trailing Whitespace
 nnoremap <silent><Leader>w :<C-u>FixWhitespace<CR>
 " Close Buf
 nnoremap <silent><Leader>q :<C-u>q<CR>
 nnoremap <silent><Leader>q1 :<C-u>q!<CR>
-" No Hilight
-nnoremap <silent><Leader>n :<C-u>noh<CR>
 " go build and run
 autocmd FileType go nnoremap <leader>b  <Plug>(go-build)
 autocmd FileType go nnoremap <leader>r  <Plug>(go-run)
@@ -169,33 +179,6 @@ let g:python_host_prog=$PYENV_ROOT . '/shims/python2'
 let g:python3_host_prog=$PYENV_ROOT . '/shims/python3'
 " ====================
 
-
-" My Function
-" ====================
-" Remove Double Quotation
-command! RDQ call RDQ()
-function! RDQ()
-let line=getline(".")
-let repl=substitute(line, '"', "'", "g")
-call setline(".", repl)
-
-let line=getline(".")
-let repl=substitute(line, '—', "", "g")
-call setline(".", repl)
-
-let line=getline(".")
-let repl=substitute(line, '', " ", "g")
-call setline(".", repl)
-
-let line=getline(".")
-let repl=substitute(line, '\.[^0-9]', "\.\r\r", "g")
-call setline(".", repl)
-
-call setreg("+", repl)
-endfunction
-" ====================
-
-
 " Vim-Plug Settings
 " ====================
 call plug#begin('~/.vim/plugged')
@@ -210,7 +193,7 @@ Plug 'davidhalter/jedi-vim', {'for': 'python'}
 Plug 'Vimjas/vim-python-pep8-indent', {'for': 'python'}
 " Go
 Plug 'fatih/vim-go', {'for': 'go'}
- Plug 'zchee/deoplete-go', {'for': 'go'}
+Plug 'zchee/deoplete-go', {'for': 'go'}
 " Markdown
 Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
 Plug 'kannokanno/previm', {'for': 'markdown'}
@@ -245,8 +228,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'scrooloose/syntastic'
 Plug 'reireias/vim-cheatsheet'
-Plug 'mtth/scratch.vim'
-Plug 'glidenote/memolist.vim'
+Plug 'vim-jp/vimdoc-ja'
 call plug#end()
 " ====================
 
@@ -265,7 +247,7 @@ let g:ackprg = 'ag --nogroup --nocolor --column'
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
-let g:go_fmt_command = "goimports"
+"let g:go_fmt_command = "goimports"
 
 " Jedi vim settings
 " ====================
@@ -279,25 +261,18 @@ augroup END
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#auto_completion_start_length = 1
 
-let g:deoplete#sources#jedi#python_path = "/Users/shinya/.pyenv/shims/python3.7"
+let g:deoplete#sources#jedi#python_path = $HOME."/.pyenv/shims/python3.7"
 let g:deoplete#sources#jedi#server_timeout=100
 let g:deoplete#sources#jedi#statement_length=100
 let g:jedi#completions_enabled = 0
 " =================================
 
-" Vim-Go Settings
-" =================================
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_structs = 1
-" =================================
-
 "NerdTree-abs
 " =================================
-map <C-n> <plug>NERDTreeTabsToggle<CR>
+"autocmd VimEnter * NERDTree
+map sn <plug>NERDTreeTabsToggle<CR>
 let g:NERDTreeShowBookmarks=1
 let NERDTreeWinSize=30
-"autocmd vimenter * NERDTree
 " =================================
 
 " fzf.vim settings
@@ -312,14 +287,14 @@ let g:fzf_action = {
 " Default fzf layout
 let g:fzf_layout = { 'down': '~30%' }
 " fzf key-map
-nnoremap <silent><C-f>a :FzfAg<CR>
-nnoremap <silent><C-m> :FzfBuffers<CR>
-nnoremap <silent><C-f>c :FzfCommands<CR>
-nnoremap <silent><C-f>f :FzfFiles<CR>
-nnoremap <silent><C-f>h :FzfHelptags<CR>
-nnoremap <silent><C-f>l :FzfLines<CR>
-nnoremap <silent><C-f>j :FzfBLines<CR>
-nnoremap <silent><C-f>t :FzfTags<CR>
+nnoremap <silent><C-s>a :FzfAg<CR>
+nnoremap <silent><C-s>s :FzfBuffers<CR>
+nnoremap <silent><C-s>d :FzfLines<CR>
+nnoremap <silent><C-s>f :FzfFiles<CR>
+nnoremap <silent><C-s>l :FzfBLines<CR>
+nnoremap <silent><C-s>h :FzfHelptags<CR>
+nnoremap <silent><C-s>t :FzfTags<CR>
+nnoremap <silent><C-s>c :FzfCommands<CR>
 " =================================
 
 " vim-expand-region settings
@@ -393,22 +368,22 @@ autocmd FileType python nnoremap <silent><Leader>ap :call Autopep8()<CR>
 
 " vim-indent-guides
 " =================================
-let g:indent_guides_auto_colors=0
-let g:indent_guides_enable_on_vim_startup=1
-let g:indent_guides_guide_size=1
-let g:indent_guides_start_level = 1
-py3 << END
-import vim
-import random
-
-oddColor = random.randint(0, 255)
-evenColor = random.randint(0, 255)
-oddCmd = ":hi IndentGuidesOdd  ctermbg={}"
-evenCmd = ":hi IndentGuidesEven ctermbg={}"
-
-vim.command(oddCmd.format(oddColor))
-vim.command(evenCmd.format(evenColor))
-END
+" let g:indent_guides_auto_colors=0
+" let g:indent_guides_enable_on_vim_startup=1
+" let g:indent_guides_guide_size=1
+" let g:indent_guides_start_level = 1
+" py3 << END
+" import vim
+" import random
+"
+" oddColor = random.randint(0, 255)
+" evenColor = random.randint(0, 255)
+" oddCmd = ":hi IndentGuidesOdd  ctermbg={}"
+" evenCmd = ":hi IndentGuidesEven ctermbg={}"
+"
+" vim.command(oddCmd.format(oddColor))
+" vim.command(evenCmd.format(evenColor))
+" END
 
 "autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd   ctermbg=232
 "autocmd VimEnter,Colorscheme * :hi IndentGuidesEven  ctermbg=240
@@ -475,3 +450,4 @@ function! LightlineMode()
 endfunction
 " =================================
 set conceallevel=0
+set helplang=ja
