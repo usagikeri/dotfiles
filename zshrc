@@ -27,7 +27,7 @@ alias kj="java -jar $1"
 # cd md dir
 alias mdd="cd ~/GoogleDrive/md"
 # source ~/.zshrc
-alias shread="source ~/.zshrc"
+alias shr="source ~/.zshrc"
 # Pukiwiki to Markdown
 alias m2p="md2pukiwiki"
 # Kobasemi VPN Connect or Disconnct
@@ -185,9 +185,13 @@ fj() {
     elif [ "$1" = "del" ]; then
         local dir
         dir=$(cat ~/.fzfjump.conf | fzf +m)
-        num="${$(cat ~/.fzfjump.conf | grep -n -e "^$dir$" | head -n 1 | cut -d: -f 1)}d"
-        sed -i '' $num ~/.fzfjump.conf
-        echo "$dir deleted"
+        if [ "$dir" != "" ]; then
+          num="${$(cat ~/.fzfjump.conf | grep -n -e "^$dir$" | head -n 1 | cut -d: -f 1)}d"
+          sed -i '' $num ~/.fzfjump.conf
+          echo "$dir deleted"
+        else
+          echo "not delete"
+        fi
     elif [ "$1" = "help" ]; then
         echo "fj # fzf jump"
         echo "fj add # registar"
@@ -237,6 +241,15 @@ fs() {
                 ssh $1@$addr
         fi
 }
+
+fp() {
+    local file
+    file=`fzf --preview "bat  --color=always --style=header,grid --line-range :100 {}"`
+    if [[ -n $file ]]
+    then
+        bat $file
+    fi
+    }
 
 ta() {
         local session
