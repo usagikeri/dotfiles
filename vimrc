@@ -242,7 +242,7 @@ augroup END
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#auto_completion_start_length = 1
 
-let g:deoplete#sources#jedi#python_path = "/Users/shinya/.pyenv/shims/python3.7"
+let g:deoplete#sources#jedi#python_path = $HOME."/.pyenv/shims/python3.7"
 let g:deoplete#sources#jedi#server_timeout=100
 let g:deoplete#sources#jedi#statement_length=100
 let g:jedi#completions_enabled = 0
@@ -257,6 +257,7 @@ let g:go_highlight_structs = 1
 
 "NerdTree-abs
 " =================================
+"autocmd vimenter * NERDTree
 map <C-n> <plug>NERDTreeTabsToggle<CR>
 let g:NERDTreeShowBookmarks=1
 let NERDTreeWinSize=20
