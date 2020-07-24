@@ -16,8 +16,8 @@ set fileencodings=utf-8
 " Internal Character-code
 set encoding=utf-8
 " Replace : ;
-noremap ; :
-noremap : ;
+"noremap ; :
+"noremap : ;
 " escape
 vnoremap u <ESC>
 " inoremap <silent><C-j> <ESC>
@@ -29,6 +29,7 @@ set ttimeoutlen=10
 " Display Settings
 " ====================
 " Display line number
+set number
 nnoremap <Leader>n :set number<CR>
 nnoremap <Leader>nn :set nonumber<CR>
 " Highlight the corresponding parentheses
